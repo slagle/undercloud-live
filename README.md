@@ -14,6 +14,7 @@ kickstart/fedora-undercloud-livecd.ks
 kickstart file that can be used to build an undercloud Live CD.
 
 1. install fedora-kickstarts and livecd-tools if needed
+1. set $UNDERCLOUD_LIVE_ROOT to the directory where undercloud-live is checked out
 1. livecd-creator --verbose  --fslabel=Fedora-Undercloud-LiveCD --cache=/var/cache/live --releasever=19 --config=/path/to/undercloud-live/kickstart/fedora-undercloud-livecd.ks
 
 This will produce a Fedora-Undercloud-LiveCD.iso file in the current directory.

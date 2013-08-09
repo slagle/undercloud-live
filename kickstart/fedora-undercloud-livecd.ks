@@ -25,7 +25,10 @@ python-pip
 ##############################################################################
 %post --nochroot
 
-cp /home/jslagle/code/github/slagle/openstack/undercloud-live/bin/undercloud.sh $INSTALL_ROOT/root/
+mkdir -p $INSTALL_ROOT/opt/stack/undercloud-live
+cp -t $INSTALL_ROOT/opt/stack/undercloud-live/ \
+    $UNDERCLOUD_LIVE_ROOT/undercloud-live/bin/undercloud-install.sh 
+    $UNDERCLOUD_LIVE_ROOT/undercloud-live/bin/undercloud-init.sh 
 
 %end
 ##############################################################################
@@ -34,12 +37,30 @@ cp /home/jslagle/code/github/slagle/openstack/undercloud-live/bin/undercloud.sh 
 ##############################################################################
 # Post
 ##############################################################################
-%post --log /root/undercloud-live-ks.log
+%post --log /opt/stack/undercloud-live/kickstart.log
+
+set -x
 
 # We need to be able to resolve addresses
 echo nameserver 8.8.8.8 > /etc/resolv.conf
 
-/root/undercloud.sh
+/opt/stack/undercloud-live/undercloud-install.sh
+
+cat > /etc/rc.d/init.d/undercloud-live-init << EOF
+#!/bin/bash
+#
+# undercloud-live-init: Undercloud live init script.
+#
+# chkconfig: 345 50 50
+# description: Undercloud live init script.
+
+/opt/stack/undercloud-live/undercloud-init.sh
+
+EOF
+
+chmod 755 /etc/rc.d/init.d/undercloud-live-init
+/sbin/restorecon /etc/rc.d/init.d/undercloud-live-init
+/sbin/chkconfig --add undercloud-live-init
 
 %end
 ##############################################################################
