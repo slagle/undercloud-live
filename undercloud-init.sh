@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -e /opt/stack/undercloud-live/.undercloud-init ]; then
+    echo undercloud-init has already run, exiting.
+    exit
+fi
+
 # the current user needs to always connect to the system's libvirt instance
 # when virsh is run
 cat >> ~/.bashrc <<EOF
@@ -42,3 +47,5 @@ if ! id | grep libvirtd; then
 fi
 
 /opt/stack/tripleo-incubator/scripts/setup-network
+
+touch /opt/stack/undercloud-live/.undercloud-init
