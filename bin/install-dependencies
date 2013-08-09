@@ -48,8 +48,8 @@ if [ "$os" = "redhat" ]; then
   # For RHEL/CentOS, python-pip is in EPEL
   sudo yum install -y python-lxml libvirt-python libvirt qemu-img qemu-kvm git python-pip openssl-devel python-devel gcc audit python-virtualenv openvswitch python-yaml
 
-  # sudo service libvirtd restart
-  # sudo service openvswitch restart
+  sudo service libvirtd restart
+  sudo service openvswitch restart
 fi
 
 # No need to install client tools, they are already installed by the undercloud
@@ -68,7 +68,7 @@ if ! id | grep libvirtd; then
            sudo sed -i 's/^#unix_sock_group.*/unix_sock_group = "libvirtd"/g' $libvirtd_file
            sudo sed -i 's/^#auth_unix_rw.*/auth_unix_rw = "none"/g' $libvirtd_file
            sudo sed -i 's/^#unix_sock_rw_perms.*/unix_sock_rw_perms = "0770"/g' $libvirtd_file
-           # sudo service libvirtd restart
+           sudo service libvirtd restart
        fi
    fi
 

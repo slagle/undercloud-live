@@ -2,6 +2,15 @@
 
 set -eux
 
+# the current user needs to always connect to the system's libvirt instance
+# when virsh is run
+cat >> ~/.bashrc <<EOF
+
+# Connect to system's libvirt instance
+alias virsh='/usr/bin/virsh -c qemu:///system'
+
+EOF
+
 sudo mkdir -m 777 -p /opt/stack
 pushd /opt/stack
 
