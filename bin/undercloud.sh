@@ -33,8 +33,9 @@ dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
     -e source-repositories boot-stack \
     -k extra-data
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
+                undercloud-live/elements \
     -e boot-stack nova-baremetal heat-localip heat-cfntools stackuser \
-       undercloude-live-config \
+       undercloud-live-config \
     -k install
 
 popd
