@@ -2,7 +2,7 @@
 
 set -eux
 
-mkdir -p /opt/stack
+sudo mkdir -m 777 -p /opt/stack
 pushd /opt/stack
 
 git clone https://github.com/slagle/python-dib-elements.git
