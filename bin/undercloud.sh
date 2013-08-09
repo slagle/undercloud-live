@@ -23,6 +23,10 @@ git clone https://github.com/stackforge/tripleo-image-elements.git
 sudo pip install -e python-dib-elements
 sudo pip install -e diskimage-builder
 
+if [ ! -f ~/.ssh/id_rsa.pub ]; then
+    ssh-keygen -b 1024 -N '' -f ~/.ssh/id_rsa
+fi
+
 /opt/stack/undercloud-live/bin/install-dependencies
 /opt/stack/tripleo-incubator/scripts/setup-network
 
