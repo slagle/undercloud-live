@@ -18,5 +18,6 @@ kickstart file that can be used to build an undercloud Live CD.
 
 This will produce a Fedora-Undercloud-LiveCD.iso file in the current directory.
 To test it simply run:
+
     qemu-kvm -m 1024 Fedora-Undercloud-LiveCD.iso 
 (you can also run it with 512 of ram, but it will be quite a bit slower)
