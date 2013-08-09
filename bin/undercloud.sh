@@ -3,6 +3,7 @@
 set -eux
 
 git clone https://github.com/slagle/python-dib-elements.git
+git clone https://github.com/slagle/undercloud-live.git
 git clone https://github.com/stackforge/diskimage-builder.git
 git clone https://github.com/openstack/tripleo-incubator.git
 git clone https://github.com/stackforge/tripleo-image-elements.git
@@ -19,5 +20,6 @@ dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
     -k extra-data
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
     -e boot-stack nova-baremetal heat-localip heat-cfntools stackuser \
+       undercloude-live-config \
     -k install
 
