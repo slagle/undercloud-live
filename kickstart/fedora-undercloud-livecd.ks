@@ -34,10 +34,10 @@ cp /home/jslagle/code/github/slagle/openstack/undercloud-live/bin/undercloud.sh 
 ##############################################################################
 # Post
 ##############################################################################
-%post
+%post --log /root/undercloud-live-ks.log
 
 # We need to be able to resolve addresses
-echo 8.8.8.8 > /etc/resolv.conf
+echo nameserver 8.8.8.8 > /etc/resolv.conf
 
 /root/undercloud.sh
 
