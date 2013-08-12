@@ -19,9 +19,18 @@ pushd /opt/stack
 
 git clone https://github.com/slagle/python-dib-elements.git
 git clone https://github.com/slagle/undercloud-live.git
-git clone https://github.com/stackforge/diskimage-builder.git
 git clone https://github.com/openstack/tripleo-incubator.git
+pushd tripleo-incubator
+git checkout 41b291844f8aed34fdbc87e959358fad407df36e
+popd
+git clone https://github.com/stackforge/diskimage-builder.git
+pushd diskimage-builder
+git checkout 97bc5d7853ebd41d878c8e8c30ee87ccaff1189a
+popd
 git clone https://github.com/stackforge/tripleo-image-elements.git
+cd tripleo-image-elements
+git checkout 988bed89673235fb82fc94d5fcb11080ee4c878e
+popd
 
 sudo pip install -e python-dib-elements
 sudo pip install -e diskimage-builder
@@ -43,9 +52,7 @@ dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
 popd
 
 # Keystone is not installing babel for some reason
-sudo source /opt/stack/venvs/keystone/bin/activate
-pip install -U babel
-deactivate
+sudo /opt/stack/venvs/keystone/bin/pip install -U babel
 
 # Download Fedora cloud image.
 mkdir -p /opt/stack/images

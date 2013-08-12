@@ -3,7 +3,11 @@
 set -eux
 
 os=redhat
+NETWORK=${NETWORK:-192.168.122.1}
+PUBLIC_INTERFACE=${PUBLIC_INTERFACE:-eth1}
 
+# this fixes a bug in python-dib-elements. not all element scripts should be
+# applied with sudo.
 sudo chown $USER.$USER $HOME/.cache
 
 if [ -e /opt/stack/undercloud-live/.undercloud-init ]; then
@@ -11,14 +15,18 @@ if [ -e /opt/stack/undercloud-live/.undercloud-init ]; then
     exit
 fi
 
+# rabbitmq-server does not start with selinux enforcing.
+sudo setenforce 0
+
 # the current user needs to always connect to the system's libvirt instance
 # when virsh is run
-sudo cat >> /etc/profile.d/virsh.sh <<EOF
+sudo su -c "cat >> /etc/profile.d/virsh.sh <<EOF
 
 # Connect to system's libvirt instance
 export LIBVIRT_DEFAULT_URI=qemu:///system
 
 EOF
+"
 
 # ssh configuration
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
@@ -32,10 +40,11 @@ fi
 
 sudo service libvirtd restart
 sudo service openvswitch restart
+sudo service rabbitmq-server restart
 
 grep libvirtd /etc/group || sudo groupadd libvirtd
 if ! id | grep libvirtd; then
-    echo "adding $USER to group libvirtd"
+   echo "adding $USER to group libvirtd"
    sudo usermod -a -G libvirtd $USER
 
    if [ "$os" = "redhat" ]; then
@@ -48,14 +57,23 @@ if ! id | grep libvirtd; then
        fi
     fi
 
-    exec sudo su -l $USER
+    exec sudo su -l $USER $0
 fi
 
 /opt/stack/tripleo-incubator/scripts/setup-network
 
 sudo cp /root/stackrc $HOME/undercloudrc
+source $HOME/undercloudrc
 
-# run os-refresh-config to apply the configuration
-sudo os-refresh-config
+# Modify config.json as necessary
+sudo sed -i "s/192.168.122.1/$NETWORK/g" /var/lib/heat-cfntools/cfn-init-data
+sudo sed -i "s/\"user\": \"stack\",/\"user\": \"$USER\",/" /var/lib/heat-cfntools/cfn-init-data
+sudo sed -i "s/eth1/$PUBLIC_INTERFACE/g" /var/lib/heat-cfntools/cfn-init-data
+
+# starts all services and runs os-refresh-config (via os-collect-config
+# service)
+sudo systemctl isolate multi-user.target
+
+sudo /opt/stack/tripleo-incubator/scripts/setup-neutron 192.0.2.2 192.0.2.3 192.0.2.0/24 192.0.2.1 ctlplane
 
 touch /opt/stack/undercloud-live/.undercloud-init
