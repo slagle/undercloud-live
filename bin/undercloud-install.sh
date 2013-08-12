@@ -7,6 +7,11 @@ set -eux
 sudo pip install -U distribute
 sudo pip install -U setuptools
 
+# For some reason, pbr is not getting installed correctly.
+# It is listed as setup_requires for diskimage-builder, and 
+# pip thinks it's installed from then on out, even though it is not.
+sudo pip install pbr
+
 sudo yum install -y python-lxml libvirt-python libvirt qemu-img qemu-kvm git python-pip openssl-devel python-devel gcc audit python-virtualenv openvswitch python-yaml
 
 sudo mkdir -m 777 -p /opt/stack
@@ -27,13 +32,20 @@ dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
     -e source-repositories boot-stack \
     -k extra-data
+# selinux-permissive is included b/c rabbitmq-server does not start with
+# selinux enforcing.
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
                 undercloud-live/elements \
     -e boot-stack nova-baremetal heat-localip heat-cfntools stackuser \
-       undercloud-live-config \
+       undercloud-live-config selinux-permissive \
     -k install
 
 popd
+
+# Keystone is not installing babel for some reason
+sudo source /opt/stack/venvs/keystone/bin/activate
+pip install -U babel
+deactivate
 
 # Download Fedora cloud image.
 mkdir -p /opt/stack/images
