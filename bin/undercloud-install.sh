@@ -2,6 +2,11 @@
 
 set -eux
 
+
+# Migrate over to the latest setuptools
+sudo pip install -U distribute
+sudo pip install -U setuptools
+
 sudo yum install -y python-lxml libvirt-python libvirt qemu-img qemu-kvm git python-pip openssl-devel python-devel gcc audit python-virtualenv openvswitch python-yaml
 
 sudo mkdir -m 777 -p /opt/stack
