@@ -6,6 +6,10 @@ os=redhat
 NETWORK=${NETWORK:-192.168.122.1}
 PUBLIC_INTERFACE=${PUBLIC_INTERFACE:-eth1}
 
+LIBVIRT_IP_ADDRESS=${LIBVIRT_IP_ADDRESS:-192.168.122.1}
+LIBVIRT_NETWORK_RANGE_START=${LIBVIRT_NETWORK_RANGE_START:-192.168.122.2}
+LIBVIRT_NETWORK_RANGE_END=${LIBVIRT_NETWORK_RANGE_END:-192.168.122.254}
+
 # this fixes a bug in python-dib-elements. not all element scripts should be
 # applied with sudo.
 sudo chown $USER.$USER $HOME/.cache
@@ -37,6 +41,10 @@ if [ ! -f ~/.ssh/authorized_keys ]; then
     touch ~/.ssh/authorized_keys
     chmod 600 ~/.ssh/authorized_keys
 fi
+
+sudo sed -i "s/192.168.122.1/$LIBVIRT_IP_ADDRESS/g" /etc/libvirt/qemu/networks/default.xml
+sudo sed -i "s/192.168.122.2/$LIBVIRT_NETWORK_RANGE_START/g" /etc/libvirt/qemu/networks/default.xml
+sudo sed -i "s/192.168.122.254/$LIBVIRT_NETWORK_RANGE_END/g" /etc/libvirt/qemu/networks/default.xml
 
 sudo service libvirtd restart
 sudo service openvswitch restart
