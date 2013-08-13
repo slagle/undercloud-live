@@ -57,5 +57,5 @@ sudo /opt/stack/venvs/keystone/bin/pip install -U babel
 # Download Fedora cloud image.
 mkdir -p /opt/stack/images
 pushd /opt/stack/images
-curl -L -O http://download.fedoraproject.org/pub/fedora/linux/releases/19/Images/x86_64/Fedora-x86_64-19-20130627-sda.qcow2
+curl -L -O http://mirror.cogentco.com/pub/linux/fedora/linux/releases/19/Images/x86_64/Fedora-x86_64-19-20130627-sda.qcow2
 popd
