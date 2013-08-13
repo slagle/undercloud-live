@@ -96,6 +96,17 @@ sudo sed -i "s/eth1/$PUBLIC_INTERFACE/g" /var/lib/heat-cfntools/cfn-init-data
 # service)
 sudo systemctl isolate multi-user.target
 
+# Wait for os-collect-config (os-refresh-config) to finish.
+while true; do
+    systemctl show os-collect-config | grep Result=success
+    rc=$?
+    if [ $rc -eq 0 ] then
+        break
+    fi
+    echo "os-collect-config not yet done, sleeping..."
+    sleep 10
+done
+
 sudo -E /opt/stack/tripleo-incubator/scripts/setup-neutron 192.0.2.2 192.0.2.3 192.0.2.0/24 192.0.2.1 ctlplane
 
 # Baremetal setup
