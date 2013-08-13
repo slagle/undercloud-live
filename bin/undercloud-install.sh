@@ -33,7 +33,7 @@ git checkout 988bed89673235fb82fc94d5fcb11080ee4c878e
 popd
 git clone https://github.com/stackforge/tripleo-heat-templates.git
 pushd tripleo-heat-templates
-git checkout 988bed89673235fb82fc94d5fcb11080ee4c878e
+git checkout 5e069fece4f9127265ef2e5d0a6df78a1bcdb145
 popd
 git clone https://github.com/tripleo/bm_poseur
 pushd bm_poseur
@@ -79,6 +79,22 @@ sudo /opt/stack/venvs/keystone/bin/pip install -U babel
 
 # sudo run from nova rootwrap complains about no tty
 sudo sed -i "s/Defaults    requiretty/# Defaults    requiretty/" /etc/sudoers
+
+# the current user needs to always connect to the system's libvirt instance
+# when virsh is run
+if [ ! -e /etc/profile.d/virsh.sh ]; then
+    sudo su -c "cat >> /etc/profile.d/virsh.sh <<EOF
+
+# Connect to system's libvirt instance
+export LIBVIRT_DEFAULT_URI=qemu:///system
+
+EOF
+"
+fi
+
+# rabbitmq-server does not start with selinux enforcing.
+sudo setenforce 0
+sudo sed -i "s/SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config
 
 # Download Fedora cloud image.
 mkdir -p /opt/stack/images

@@ -49,21 +49,6 @@ if [ -e /opt/stack/undercloud-live/.undercloud-init ]; then
     exit
 fi
 
-# rabbitmq-server does not start with selinux enforcing.
-sudo setenforce 0
-
-# the current user needs to always connect to the system's libvirt instance
-# when virsh is run
-if [ ! -e /etc/profile.d/virsh.sh ]; then
-    sudo su -c "cat >> /etc/profile.d/virsh.sh <<EOF
-
-# Connect to system's libvirt instance
-export LIBVIRT_DEFAULT_URI=qemu:///system
-
-EOF
-"
-fi
-
 # ssh configuration
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
     ssh-keygen -b 1024 -N '' -f ~/.ssh/id_rsa
