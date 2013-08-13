@@ -116,5 +116,6 @@ export MACS=$(bm_poseur get-macs)
 # $TRIPLEO_ROOT is not true to the tripleo sense, but it's where
 # setup-baremetal look for the deploy kernel and ramfs.
 TRIPLEO_ROOT=/opt/stack/images setup-baremetal 1 1024 10 undercloud
+cat /opt/stack/boot-stack/virtual-power-key.pub >> ~/.ssh/authorized_keys
 
 touch /opt/stack/undercloud-live/.undercloud-init
