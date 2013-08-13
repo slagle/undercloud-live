@@ -3,9 +3,16 @@
 set -eux
 
 os=redhat
-NETWORK=${NETWORK:-192.168.122.1}
+
+
+# The first interface on F19 is coming up as ens3.
 PUBLIC_INTERFACE=${PUBLIC_INTERFACE:-eth1}
 
+# These variables are meant to be overridden if they need to be changed.
+# If you're testing on a vm that is running on a host with the default
+# 192.168.122.1 network already defined, you will want to set environment
+# variables to override these.
+NETWORK=${NETWORK:-192.168.122.1}
 LIBVIRT_IP_ADDRESS=${LIBVIRT_IP_ADDRESS:-192.168.122.1}
 LIBVIRT_NETWORK_RANGE_START=${LIBVIRT_NETWORK_RANGE_START:-192.168.122.2}
 LIBVIRT_NETWORK_RANGE_END=${LIBVIRT_NETWORK_RANGE_END:-192.168.122.254}
