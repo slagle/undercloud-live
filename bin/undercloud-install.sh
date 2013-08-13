@@ -31,6 +31,10 @@ git clone https://github.com/stackforge/tripleo-image-elements.git
 pushd tripleo-image-elements
 git checkout 988bed89673235fb82fc94d5fcb11080ee4c878e
 popd
+git clone https://github.com/stackforge/tripleo-heat-templates.git
+pushd tripleo-heat-templates
+git checkout 988bed89673235fb82fc94d5fcb11080ee4c878e
+popd
 git clone https://github.com/tripleo/bm_poseur
 pushd bm_poseur
 git checkout 13c65747f50bda0cec4e90cc37aed6679a70da95
@@ -72,6 +76,9 @@ popd
 
 # Keystone is not installing babel for some reason
 sudo /opt/stack/venvs/keystone/bin/pip install -U babel
+
+# sudo run from nova rootwrap complains about no tty
+sudo sed -i "s/Defaults    requiretty/# Defaults    requiretty/" /etc/sudoers
 
 # Download Fedora cloud image.
 mkdir -p /opt/stack/images
