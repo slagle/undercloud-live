@@ -24,13 +24,15 @@ sudo setenforce 0
 
 # the current user needs to always connect to the system's libvirt instance
 # when virsh is run
-sudo su -c "cat >> /etc/profile.d/virsh.sh <<EOF
+if [ ! -e /etc/profile.d/virsh.sh ]; then
+    sudo su -c "cat >> /etc/profile.d/virsh.sh <<EOF
 
 # Connect to system's libvirt instance
 export LIBVIRT_DEFAULT_URI=qemu:///system
 
 EOF
 "
+fi
 
 # ssh configuration
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
