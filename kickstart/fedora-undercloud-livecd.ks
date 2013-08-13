@@ -46,6 +46,9 @@ echo nameserver 8.8.8.8 > /etc/resolv.conf
 
 /opt/stack/undercloud-live/undercloud-install.sh
 
+# setup users to be able to run sudo with no password
+sed -i "s/# %wheel/%wheel/" /etc/sudoers
+
 cat > /etc/rc.d/init.d/undercloud-live-init << EOF
 #!/bin/bash
 #

@@ -77,27 +77,13 @@ sudo sed -i "s/192.168.122.1/$NETWORK/g" /var/lib/heat-cfntools/cfn-init-data
 sudo sed -i "s/\"user\": \"stack\",/\"user\": \"$USER\",/" /var/lib/heat-cfntools/cfn-init-data
 sudo sed -i "s/eth1/$PUBLIC_INTERFACE/g" /var/lib/heat-cfntools/cfn-init-data
 
-# starts all services and runs os-refresh-config (via os-collect-config
-# service)
-sudo systemctl isolate multi-user.target
-
-# Wait for os-collect-config (os-refresh-config) to finish.
-while true; do
-    systemctl show os-collect-config | grep Result=success
-    rc=$?
-    if [ $rc -eq 0 ] then
-        break
-    fi
-    echo "os-collect-config not yet done, sleeping..."
-    sleep 10
-done
-
 sudo -E /opt/stack/tripleo-incubator/scripts/setup-neutron 192.0.2.2 192.0.2.3 192.0.2.0/24 192.0.2.1 ctlplane
 
 # Baremetal setup
 create-nodes 1 1024 10 3
 # MACS must be set for setup-baremetal to work
 export MACS=$(bm_poseur get-macs)
+sudo sed -i "s/ubuntu/undercloud-live/g" /opt/stack/tripleo-incubator/scripts/register-nodes
 # $TRIPLEO_ROOT is not true to the tripleo sense, but it's where
 # setup-baremetal look for the deploy kernel and ramfs.
 TRIPLEO_ROOT=/opt/stack/images setup-baremetal 1 1024 10 undercloud
