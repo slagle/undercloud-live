@@ -31,9 +31,16 @@ git clone https://github.com/stackforge/tripleo-image-elements.git
 pushd tripleo-image-elements
 git checkout 988bed89673235fb82fc94d5fcb11080ee4c878e
 popd
+git clone https://github.com/tripleo/bm_poseur
+pushd bm_poseur
+git checkout 13c65747f50bda0cec4e90cc37aed6679a70da95
+popd
 
 sudo pip install -e python-dib-elements
 sudo pip install -e diskimage-builder
+
+# Add a symlink for bm_poseur as it has no setup.py
+sudo ln -s /opt/stack/bm_poseur/bm_poseur /usr/local/bin/bm_poseur
 
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
     -e fedora \
