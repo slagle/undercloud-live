@@ -12,7 +12,7 @@ LIBVIRT_NETWORK_RANGE_END=${LIBVIRT_NETWORK_RANGE_END:-192.168.122.254}
 
 # this fixes a bug in python-dib-elements. not all element scripts should be
 # applied with sudo.
-sudo chown $USER.$USER $HOME/.cache
+sudo chown -R $USER.$USER $HOME/.cache
 
 if [ -e /opt/stack/undercloud-live/.undercloud-init ]; then
     echo undercloud-init has already run, exiting.
