@@ -46,13 +46,15 @@ sudo pip install -e diskimage-builder
 # Add a symlink for bm_poseur as it has no setup.py
 sudo ln -s /opt/stack/bm_poseur/bm_poseur /usr/local/bin/bm_poseur
 
-# Add scripts directory from tripleo-incubator to the path.
+# Add scripts directory from tripleo-incubator and diskimage-builder to the
+# path.
 # These scripts can't just be symlinked into a bin directory because they do
 # directory manipulation that assumes they're in a known location.
 if [ ! -e /etc/profile.d/tripleo-incubator-scripts.sh ]; then
-    sudo su -c "cat >> /etc/profile.d/tripleo-incubator-scripts.sh <<EOF
+    sudo su -c "cat >> /etc/profile.d/tripleo-scripts.sh <<EOF
 
 export PATH=$PATH:/opt/stack/tripleo-incubator/scripts/
+export PATH=/opt/stack/diskimage-builder/bin/:$PATH
 
 EOF
 "
@@ -95,6 +97,9 @@ fi
 # rabbitmq-server does not start with selinux enforcing.
 sudo setenforce 0
 sudo sed -i "s/SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config
+
+# Overcloud heat template
+sudo make -C /opt/stack/triple-heat-templates overcloud.yaml
 
 # Download Fedora cloud image.
 mkdir -p /opt/stack/images
