@@ -98,4 +98,12 @@ sudo systemctl isolate multi-user.target
 
 sudo -E /opt/stack/tripleo-incubator/scripts/setup-neutron 192.0.2.2 192.0.2.3 192.0.2.0/24 192.0.2.1 ctlplane
 
+# Baremetal setup
+create-nodes 1 1024 10 3
+# MACS must be set for setup-baremetal to work
+export MACS=$(bm_poseur get-macs)
+# $TRIPLEO_ROOT is not true to the tripleo sense, but it's where
+# setup-baremetal look for the deploy kernel and ramfs.
+TRIPLEO_ROOT=/opt/stack/images setup-baremetal 1 1024 10 undercloud
+
 touch /opt/stack/undercloud-live/.undercloud-init
