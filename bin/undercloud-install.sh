@@ -78,6 +78,8 @@ popd
 
 # Keystone is not installing babel for some reason
 sudo /opt/stack/venvs/keystone/bin/pip install -U babel
+# Same for neutron
+sudo /opt/stack/venvs/neutron/bin/pip install -U babel
 
 # sudo run from nova rootwrap complains about no tty
 sudo sed -i "s/Defaults    requiretty/# Defaults    requiretty/" /etc/sudoers
@@ -99,7 +101,7 @@ sudo setenforce 0
 sudo sed -i "s/SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config
 
 # Overcloud heat template
-sudo make -C /opt/stack/triple-heat-templates overcloud.yaml
+sudo make -C /opt/stack/tripleo-heat-templates overcloud.yaml
 
 # Download Fedora cloud image.
 mkdir -p /opt/stack/images
