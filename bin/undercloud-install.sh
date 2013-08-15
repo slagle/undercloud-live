@@ -51,13 +51,8 @@ sudo ln -s /opt/stack/bm_poseur/bm_poseur /usr/local/bin/bm_poseur
 # These scripts can't just be symlinked into a bin directory because they do
 # directory manipulation that assumes they're in a known location.
 if [ ! -e /etc/profile.d/tripleo-incubator-scripts.sh ]; then
-    sudo su -c "cat >> /etc/profile.d/tripleo-scripts.sh <<EOF
-
-export PATH=$PATH:/opt/stack/tripleo-incubator/scripts/
-export PATH=/opt/stack/diskimage-builder/bin/:$PATH
-
-EOF
-"
+    sudo bash -c "echo export PATH='\$PATH':/opt/stack/tripleo-incubator/scripts/ >> /etc/profile.d/tripleo-incubator-scripts.sh"
+    sudo bash -c "echo export PATH=/opt/stack/diskimage-builder/bin/:'\$PATH' >> /etc/profile.d/tripleo-incubator-scripts.sh"
 fi
 
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
