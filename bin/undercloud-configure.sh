@@ -65,9 +65,6 @@ sudo service openvswitch restart
 # this often reports failure, even though the service is up
 sudo service rabbitmq-server restart || true
 
-sudo sed -i "s/bridge name='brbm'/bridge name='br-ctlplane'/" /opt/stack/tripleo-incubator/templates/brbm.xml
-/opt/stack/tripleo-incubator/scripts/setup-network
-
 sudo cp /root/stackrc $HOME/undercloudrc
 source $HOME/undercloudrc
 
