@@ -27,9 +27,9 @@ git clone https://github.com/stackforge/diskimage-builder.git
 pushd diskimage-builder
 git checkout 97bc5d7853ebd41d878c8e8c30ee87ccaff1189a
 popd
-git clone https://github.com/stackforge/tripleo-image-elements.git
+git clone https://github.com/slagle/tripleo-image-elements.git
 pushd tripleo-image-elements
-git checkout 988bed89673235fb82fc94d5fcb11080ee4c878e
+git checkout undercloud-live
 popd
 git clone https://github.com/stackforge/tripleo-heat-templates.git
 pushd tripleo-heat-templates
