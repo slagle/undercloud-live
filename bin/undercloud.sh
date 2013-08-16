@@ -22,5 +22,6 @@ while true; do
 done
 
 # Download images
+$(dirname $0)/undercloud-network.sh
 $(dirname $0)/undercloud-images.sh
 $(dirname $0)/undercloud-setup.sh
