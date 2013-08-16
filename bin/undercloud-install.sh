@@ -35,7 +35,7 @@ git checkout undercloud-live
 popd
 git clone https://github.com/stackforge/tripleo-heat-templates.git
 pushd tripleo-heat-templates
-git checkout 5e069fece4f9127265ef2e5d0a6df78a1bcdb145
+git checkout 2334a8f0b2526aace63c74a7f58a5a8060d29487
 popd
 git clone https://github.com/tripleo/bm_poseur
 pushd bm_poseur
