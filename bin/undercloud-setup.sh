@@ -4,6 +4,8 @@ set -eux
 
 # The commands in this script require a running, configured cloud.
 
+source $HOME/undercloudrc
+
 export UNDERCLOUD_IP=192.0.2.1
 /opt/stack/tripleo-incubator/scripts/setup-neutron 192.0.2.5 192.0.2.24 192.0.2.0/24 $UNDERCLOUD_IP ctlplane
 
