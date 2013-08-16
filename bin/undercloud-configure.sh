@@ -6,7 +6,7 @@ os=redhat
 
 
 # The first interface on F19 is coming up as ens3.
-PUBLIC_INTERFACE=${PUBLIC_INTERFACE:-eth1}
+PUBLIC_INTERFACE=${PUBLIC_INTERFACE:-ucl0}
 
 # These variables are meant to be overridden if they need to be changed.
 # If you're testing on a vm that is running on a host with the default
