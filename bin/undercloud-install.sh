@@ -97,9 +97,3 @@ sudo sed -i "s/SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config
 
 # Overcloud heat template
 sudo make -C /opt/stack/tripleo-heat-templates overcloud.yaml
-
-# Download Fedora cloud image.
-mkdir -p /opt/stack/images
-pushd /opt/stack/images
-curl -L -O http://mirror.cogentco.com/pub/linux/fedora/linux/releases/19/Images/x86_64/Fedora-x86_64-19-20130627-sda.qcow2
-popd
