@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eux
+
 PUBLIC_INTERFACE=${PUBLIC_INTERFACE:-ucl0}
 
 sudo sed -i "s/bridge name='brbm'/bridge name='br-ctlplane'/" /opt/stack/tripleo-incubator/templates/brbm.xml
