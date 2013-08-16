@@ -2,6 +2,8 @@
 
 set -eux
 
+# Make sure pip is installed
+sudo yum install -y python-pip
 
 # Migrate over to the latest setuptools
 sudo pip install -U distribute
