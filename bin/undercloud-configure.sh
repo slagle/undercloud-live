@@ -65,7 +65,8 @@ fi
 
 sudo service libvirtd restart
 sudo service openvswitch restart
-sudo service rabbitmq-server restart
+# this often reports failure, even though the service is up
+sudo service rabbitmq-server restart || true
 
 /opt/stack/tripleo-incubator/scripts/setup-network
 
