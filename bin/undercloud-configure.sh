@@ -5,7 +5,7 @@ set -eux
 os=redhat
 
 
-# The first interface on F19 is coming up as ens3.
+# This is the "fake" interface needed for init-neutron-ovs
 PUBLIC_INTERFACE=${PUBLIC_INTERFACE:-ucl0}
 
 # These variables are meant to be overridden if they need to be changed.
