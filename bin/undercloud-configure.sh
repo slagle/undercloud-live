@@ -27,6 +27,7 @@ grep libvirtd /etc/group || sudo groupadd libvirtd
 if ! id | grep libvirtd; then
    echo "adding $USER to group libvirtd"
    sudo usermod -a -G libvirtd $USER
+   GROUP_ADDED=1
 
    if [ "$os" = "redhat" ]; then
        libvirtd_file=/etc/libvirt/libvirtd.conf
@@ -37,10 +38,6 @@ if ! id | grep libvirtd; then
            sudo service libvirtd restart
        fi
     fi
-
-    # exec the same (current) script again now that the user has been added to
-    # the libvirtd group
-    exec sudo su -l $USER $0
 fi
 
 
@@ -81,3 +78,7 @@ sudo sed -i "s/eth1/$PUBLIC_INTERFACE/g" /var/lib/heat-cfntools/cfn-init-data
 sudo sed -i "s/192.168.122.1/$NETWORK/g" /opt/stack/os-config-applier/templates/var/opt/undercloud-live/masquerade
 
 touch /opt/stack/undercloud-live/.undercloud-init
+
+if [ -n "$GROUP_ADDED" ]; then
+    exec sudo su -l jslagle
+fi
