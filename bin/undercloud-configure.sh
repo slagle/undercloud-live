@@ -23,6 +23,7 @@ sudo sed -i "s/192.168.122.254/$LIBVIRT_NETWORK_RANGE_END/g" /etc/libvirt/qemu/n
 
 # This libvirtd group modification should be at the top of the script due to
 # the exec.  
+GROUP_ADDED=""
 grep libvirtd /etc/group || sudo groupadd libvirtd
 if ! id | grep libvirtd; then
    echo "adding $USER to group libvirtd"
