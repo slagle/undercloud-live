@@ -13,3 +13,7 @@ sudo ip link add $PUBLIC_INTERFACE type dummy
 # etc.
 sudo init-neutron-ovs
 
+# TODO: This is bad, but there's a bug somewhere in the firewall configuration
+# that causes the overcloud to not be able to get it's initial pxe boot files.
+# Disabling the firewall for now just for testing.
+sudo systemctl stop firewalld
