@@ -1,16 +1,26 @@
-undercloud-live
-===============
+# undercloud-live
 
-Tools and scripts to build an undercloud Live CD and configure an alredy
+Tools and scripts to build an undercloud Live CD and configure an already
 running system into an undercloud.
 
-bin/undercloud.sh
------------------
+## bin/undercloud.sh
 Run as current user to configure the current system into an undercloud.
 sudo (with no password) privileges are required.
 
-kickstart/fedora-undercloud-livecd.ks
--------------------------------------
+### Prerequisites
+* sudo as root ability
+* The following environment variables should be defined as URL's that can be
+  used to download the needed images:
+
+        $DEPLOY_RAMDISK_URL
+        $DEPLOY_INITRAMFS_URL
+        $OVERCLOUD_CONTROL_URL
+        $OVERCLOUD_COMPUTE_URL
+
+  If you prefer to provide the images a different way, just add them under
+  /opt/stack/images, and comment out undercloud-images.sh in undercloud.sh.
+
+## kickstart/fedora-undercloud-livecd.ks
 kickstart file that can be used to build an undercloud Live CD.
 
 1. install fedora-kickstarts and livecd-tools if needed
