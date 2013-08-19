@@ -23,7 +23,7 @@ git clone https://github.com/slagle/python-dib-elements.git
 git clone https://github.com/slagle/undercloud-live.git
 git clone https://github.com/openstack/tripleo-incubator.git
 pushd tripleo-incubator
-git checkout 41b291844f8aed34fdbc87e959358fad407df36e
+git checkout undercloud-live
 popd
 git clone https://github.com/stackforge/diskimage-builder.git
 pushd diskimage-builder
