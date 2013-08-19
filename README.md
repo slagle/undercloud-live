@@ -20,6 +20,11 @@ sudo (with no password) privileges are required.
   If you prefer to provide the images a different way, just add them under
   /opt/stack/images, and comment out undercloud-images.sh in undercloud.sh.
 
+### Caveats
+* The firewalld service will be shutdown by undercloud.sh.  There's current a
+  bug in the iptables configuration that prevents the overcloud that is still
+  being investigated.
+
 ## kickstart/fedora-undercloud-livecd.ks
 kickstart file that can be used to build an undercloud Live CD.
 
