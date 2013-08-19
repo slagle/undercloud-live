@@ -24,6 +24,10 @@ sudo (with no password) privileges are required.
 * The firewalld service will be shutdown by undercloud.sh.  There's current a
   bug in the iptables configuration that prevents the overcloud that is still
   being investigated.
+* SELinux is set to Permissive mode.  Otherwise, rabbitmq-server will not
+  start. See:
+  https://bugzilla.redhat.com/show_bug.cgi?id=998682
+  Note: we will be switching to use qpid soon
 
 ## kickstart/fedora-undercloud-livecd.ks
 kickstart file that can be used to build an undercloud Live CD.
