@@ -2,6 +2,8 @@
 
 set -eux
 
+# This script needs to be rerun if you reboot the undercloud.
+
 PUBLIC_INTERFACE=${PUBLIC_INTERFACE:-ucl0}
 
 sudo sed -i "s/bridge name='brbm'/bridge name='br-ctlplane'/" /opt/stack/tripleo-incubator/templates/brbm.xml
@@ -17,3 +19,6 @@ sudo init-neutron-ovs
 # that causes the overcloud to not be able to get it's initial pxe boot files.
 # Disabling the firewall for now just for testing.
 sudo systemctl stop firewalld
+
+# Restart dnsmasq service.  This is needed b/c br-ctlplane was assigned an IP.
+sudo systemctl restart nova-bm-dnsmasq

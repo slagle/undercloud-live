@@ -21,6 +21,8 @@ sudo (with no password) privileges are required.
   /opt/stack/images, and comment out undercloud-images.sh in undercloud.sh.
 
 ### Caveats
+* If you reboot the undercloud system, you will need to rerun
+  bin/undercloud-network.sh
 * The firewalld service will be shutdown by undercloud.sh.  There's current a
   bug in the iptables configuration that prevents the overcloud that is still
   being investigated.
