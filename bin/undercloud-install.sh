@@ -28,7 +28,7 @@ git clone https://github.com/slagle/tripleo-incubator.git
 pushd tripleo-incubator
 git checkout undercloud-live
 popd
-git clone https://github.com/stackforge/diskimage-builder.git
+git clone https://github.com/openstack/diskimage-builder.git
 pushd diskimage-builder
 git checkout 97bc5d7853ebd41d878c8e8c30ee87ccaff1189a
 popd
@@ -36,7 +36,7 @@ git clone https://github.com/slagle/tripleo-image-elements.git
 pushd tripleo-image-elements
 git checkout undercloud-live
 popd
-git clone https://github.com/stackforge/tripleo-heat-templates.git
+git clone https://github.com/openstack/tripleo-heat-templates.git
 pushd tripleo-heat-templates
 git checkout 2334a8f0b2526aace63c74a7f58a5a8060d29487
 popd
