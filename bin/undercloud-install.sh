@@ -5,6 +5,9 @@ set -eux
 # Make sure pip is installed
 sudo yum install -y python-pip
 
+# busybox is a requirement of ramdisk-image-create from diskimage-builder
+sudo yum install -y busybox
+
 # Migrate over to the latest setuptools
 sudo pip install -U distribute
 sudo pip install -U setuptools
