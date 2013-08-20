@@ -5,6 +5,8 @@
 
 set -eux
 
+source $HOME/undercloudrc
+
 IMAGES_DIR=/opt/stack/images
 CONTROL_IMG=$IMAGES_DIR/overcloud-control.qcow2
 COMPUTE_IMG=$IMAGES_DIR/overcloud-compute.qcow2
