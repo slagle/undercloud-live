@@ -15,4 +15,4 @@ export UNDERCLOUD_IP=192.0.2.1
 cat /opt/stack/boot-stack/virtual-power-key.pub >> ~/.ssh/authorized_keys
 
 # Baremetal setup
-/opt/stack/tripleo-incubator/scripts/create-nodes 1 1024 10 3
+/opt/stack/tripleo-incubator/scripts/create-nodes 1 1024 10 2
