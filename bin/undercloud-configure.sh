@@ -17,6 +17,11 @@ LIBVIRT_IP_ADDRESS=${LIBVIRT_IP_ADDRESS:-192.168.122.1}
 LIBVIRT_NETWORK_RANGE_START=${LIBVIRT_NETWORK_RANGE_START:-192.168.122.2}
 LIBVIRT_NETWORK_RANGE_END=${LIBVIRT_NETWORK_RANGE_END:-192.168.122.254}
 
+if [ -e /opt/stack/undercloud-live/.undercloud-init ]; then
+    echo undercloud-init has already run, exiting.
+    exit
+fi
+
 sudo sed -i "s/192.168.122.1/$LIBVIRT_IP_ADDRESS/g" /etc/libvirt/qemu/networks/default.xml
 sudo sed -i "s/192.168.122.2/$LIBVIRT_NETWORK_RANGE_START/g" /etc/libvirt/qemu/networks/default.xml
 sudo sed -i "s/192.168.122.254/$LIBVIRT_NETWORK_RANGE_END/g" /etc/libvirt/qemu/networks/default.xml
@@ -41,15 +46,10 @@ if ! id | grep libvirtd; then
     fi
 fi
 
-
 # this fixes a bug in python-dib-elements. not all element scripts should be
 # applied with sudo.
 sudo chown -R $USER.$USER $HOME/.cache
 
-if [ -e /opt/stack/undercloud-live/.undercloud-init ]; then
-    echo undercloud-init has already run, exiting.
-    exit
-fi
 
 # ssh configuration
 if [ ! -f ~/.ssh/id_rsa.pub ]; then
@@ -79,5 +79,5 @@ sudo sed -i "s/192.168.122.1/$NETWORK/g" /opt/stack/os-config-applier/templates/
 touch /opt/stack/undercloud-live/.undercloud-init
 
 if [ -n "$GROUP_ADDED" ]; then
-    exec sudo su -l jslagle
+    exec sudo su -l jslagle $0
 fi
