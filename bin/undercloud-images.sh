@@ -12,7 +12,7 @@ BM_KERNEL=$IMAGES_DIR/deploy-ramdisk.kernel
 BM_INITRAMFS=$IMAGES_DIR/deploy-ramdisk.initramfs
 ELEMENTS_PATH=/opt/stack/tripleo-image-elements/elements
 
-export $ELEMENTS_PATH
+export ELEMENTS_PATH
 
 mkdir -p $IMAGES_DIR
 pushd $IMAGES_DIR
