@@ -28,7 +28,7 @@ pushd $IMAGES_DIR
 popd
 
 if [ ! -f $BM_KERNEL ]; then
-    /opt/stack/diskimage-builder/bin/disk-image-create \
+    /opt/stack/diskimage-builder/bin/ramdisk-image-create \
         -a amd64 \
         -o $IMAGES_DIR/deploy-ramdisk \
         fedora deploy

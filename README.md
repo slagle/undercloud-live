@@ -21,13 +21,17 @@ applying one of the diskimage-builder elements, you will see a prompt to
 continue or not.  This is for debugging purposes.
 
 Once the script has completed, you should have a functioning undercloud.  At
-this point, you would move onto the next steps of building images for and
+this point, you would move onto the next steps of building images and
 deploying an overcloud.  These steps are also scripted in the
 undercloud-images.sh and undercloud-deploy-overcloud.sh scripts.  So you can
 just run these if you prefer to do that instead:
 
     $ undercloud-live/bin/undercloud-images.sh
     $ undercloud-live/bin/undercloud-deploy-overcloud.sh
+
+undercloud-images.sh will not build images if the files already exist under
+/opt/stack/images.  If you already have image files you want to use on the
+undercloud, just copy them into /opt/stack/images.
 
 
 ### Prerequisites
