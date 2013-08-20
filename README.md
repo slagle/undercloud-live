@@ -39,6 +39,15 @@ undercloud, just copy them into /opt/stack/images.
 * sudo as root ability
 
 ### Caveats
+* undercloud.sh deploys software from git repositories and directly from PyPi.
+  This will be updated to use rpm's at a later date.
+* The git repositories that are checked out under /opt/stack are set to
+  checkout specific hashes.  Some of these hashes are specified in
+  bin/undercloud-install.sh.  Others are specified in an undercloud-live branch
+  of a fork of tripleo-image-elements at 
+  https://github.com/slagle/tripleo-image-elements.git.  The undercloud-live
+  branch there has specific hashes set for each element that does a git clone
+  in the source-repository interface.
 * If you reboot the undercloud system, you will need to rerun
   bin/undercloud-network.sh
 * The firewalld service will be shutdown by undercloud.sh.  There's current a
