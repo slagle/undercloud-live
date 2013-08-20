@@ -45,7 +45,7 @@ fi
 if [ ! -f $COMPUTE_IMG ]; then
     /opt/stack/diskimage-builder/bin/disk-image-create \
         -a amd64 \
-        -o $IMAGES_DIR/overcloud-control \
+        -o $IMAGES_DIR/overcloud-compute \
         fedora nova-compute nova-kvm \
         neutron-openvswitch-agent heat-localip heat-cfntools stackuser
 fi
