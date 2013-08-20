@@ -46,8 +46,7 @@ undercloud, just copy them into /opt/stack/images.
   bin/undercloud-install.sh.  Others are specified in an undercloud-live branch
   of a fork of tripleo-image-elements at 
   https://github.com/slagle/tripleo-image-elements.git.  The undercloud-live
-  branch there has specific hashes set for each element that does a git clone
-  in the source-repository interface.
+  branch there sets specific hashes to use via the source-repository interface.
 * If you reboot the undercloud system, you will need to rerun
   bin/undercloud-network.sh
 * The firewalld service will be shutdown by undercloud.sh.  There's current a
