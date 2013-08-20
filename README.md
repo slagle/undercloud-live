@@ -3,22 +3,32 @@
 Tools and scripts to build an undercloud Live CD and configure an already
 running system into an undercloud.
 
+To get started, clone this repo to your home directory:
+
+    $ cd
+    $ git clone https://github.com/slagle/undercloud-live.git
+
 ## bin/undercloud.sh
-Run as current user to configure the current system into an undercloud.
-sudo (with no password) privileges are required.
+Run as current user to configure the current system into an undercloud like so:
+
+    $ undercloud-live/bin/undercloud.sh
+
+The script logs to ~/.undercloud-live/undercloud.log.  If there is an error
+applying one of the diskimage-builder elements, you will see a prompt to
+continue or not.  This is for debugging purposes.
+
+Once the script has completed, you should have a functioning undercloud.  At
+this point, you would move onto the next steps of building images for and
+deploying an overcloud.  These steps are also scripted in the
+undercloud-images.sh and undercloud-deploy-overcloud.sh scripts.  So you can
+just run these if you prefer to do that instead:
+
+    $ undercloud-live/bin/undercloud-images.sh
+    $ undercloud-live/bin/undercloud-deploy-overcloud.sh
+
 
 ### Prerequisites
 * sudo as root ability
-* The following environment variables should be defined as URL's that can be
-  used to download the needed images:
-
-        $DEPLOY_RAMDISK_URL
-        $DEPLOY_INITRAMFS_URL
-        $OVERCLOUD_CONTROL_URL
-        $OVERCLOUD_COMPUTE_URL
-
-  If you prefer to provide the images a different way, just add them under
-  /opt/stack/images, and comment out undercloud-images.sh in undercloud.sh.
 
 ### Caveats
 * If you reboot the undercloud system, you will need to rerun
