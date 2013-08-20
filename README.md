@@ -1,9 +1,9 @@
 # undercloud-live
 
 Tools and scripts to build an undercloud Live CD and configure an already
-running Fedora 19 system into an undercloud.  The script is meant to be run on
-physical hardware.  However, it can also be used on a vm, but you need to make
-sure that the vm you intend to configure as a undercloud as been configured to
+running Fedora 19 x86_64 system into an undercloud.  The script is meant to be run on
+physical hardware.  However, it can also be used on a vm.  When using a vm you need to make
+sure that the vm you intend to configure as a undercloud has been configured to
 use nested kvm (see [here][1] and [here][2]).
 
 To get started, clone this repo to your home directory:
@@ -12,7 +12,7 @@ To get started, clone this repo to your home directory:
     $ git clone https://github.com/slagle/undercloud-live.git
 
 ## bin/undercloud.sh
-Run as current user to configure the current system into an undercloud like so:
+Run as current user to configure the current system into an undercloud:
 
     $ undercloud-live/bin/undercloud.sh
 
@@ -23,19 +23,20 @@ continue or not.  This is for debugging purposes.
 Once the script has completed, you should have a functioning undercloud.  At
 this point, you would move onto the next steps of building images and
 deploying an overcloud.  These steps are also scripted in the
-undercloud-images.sh and undercloud-deploy-overcloud.sh scripts.  So you can
-just run these if you prefer to do that instead:
+undercloud-images.sh and  
+undercloud-deploy-overcloud.sh scripts.  You can
+just run these scripts if you prefer to do that instead:
 
     $ undercloud-live/bin/undercloud-images.sh
     $ undercloud-live/bin/undercloud-deploy-overcloud.sh
 
-undercloud-images.sh will not build images if the files already exist under
+NOTE: undercloud-images.sh will not build images if the files already exist under
 /opt/stack/images.  If you already have image files you want to use on the
 undercloud, just copy them into /opt/stack/images.
 
 
 ### Prerequisites
-* Only works on Fedora 19
+* Only works on Fedora 19 x86_64
 * sudo as root ability
 
 ### Caveats
@@ -49,8 +50,8 @@ undercloud, just copy them into /opt/stack/images.
   branch there sets specific hashes to use via the source-repository interface.
 * If you reboot the undercloud system, you will need to rerun
   bin/undercloud-network.sh
-* The firewalld service will be shutdown by undercloud.sh.  There's current a
-  bug in the iptables configuration that prevents the overcloud that is still
+* The firewalld service will be shutdown by undercloud.sh.  There's currently a
+  bug in the iptables configuration that prevents the overcloud from pxe booting that is still
   being investigated.
 * SELinux is set to Permissive mode.  Otherwise, rabbitmq-server will not
   start.  
