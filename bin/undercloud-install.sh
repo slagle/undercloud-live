@@ -59,17 +59,20 @@ fi
 
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
     -e fedora \
-    -k pre-install
+    -k pre-install \
+    -i
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
     -e source-repositories boot-stack \
-    -k extra-data
+    -k extra-data \
+    -i
 # selinux-permissive is included b/c rabbitmq-server does not start with
 # selinux enforcing.
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
                 undercloud-live/elements \
     -e boot-stack nova-baremetal heat-localip heat-cfntools stackuser \
        undercloud-live-config selinux-permissive \
-    -k install
+    -k install \
+    -i
 
 popd
 
