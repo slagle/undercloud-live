@@ -15,3 +15,5 @@ sudo systemctl daemon-reload 2>&1 | tee -a $LOG
 sudo os-refresh-config 2>&1 | tee -a $LOG
 
 $(dirname $0)/undercloud-setup.sh 2>&1 | tee -a $LOG
+
+echo "undercloud.sh run complete."
