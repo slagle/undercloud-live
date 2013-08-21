@@ -25,25 +25,11 @@ pushd /opt/stack
 git clone https://github.com/slagle/python-dib-elements.git
 git clone https://github.com/slagle/undercloud-live.git
 git clone https://github.com/slagle/tripleo-incubator.git
-pushd tripleo-incubator
-git checkout undercloud-live
-popd
+pushd tripleo-incubator && git checkout undercloud-live && popd
 git clone https://github.com/openstack/diskimage-builder.git
-pushd diskimage-builder
-git checkout 97bc5d7853ebd41d878c8e8c30ee87ccaff1189a
-popd
-git clone https://github.com/slagle/tripleo-image-elements.git
-pushd tripleo-image-elements
-git checkout undercloud-live
-popd
+git clone https://github.com/openstack/tripleo-image-elements.git
 git clone https://github.com/openstack/tripleo-heat-templates.git
-pushd tripleo-heat-templates
-git checkout 2334a8f0b2526aace63c74a7f58a5a8060d29487
-popd
 git clone https://github.com/tripleo/bm_poseur
-pushd bm_poseur
-git checkout 13c65747f50bda0cec4e90cc37aed6679a70da95
-popd
 
 sudo pip install -e python-dib-elements
 sudo pip install -e diskimage-builder
