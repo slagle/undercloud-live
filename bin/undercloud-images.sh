@@ -40,7 +40,7 @@ if [ ! -f $CONTROL_IMG ]; then
     /opt/stack/diskimage-builder/bin/disk-image-create \
         -a amd64 \
         -o $IMAGES_DIR/overcloud-control \
-        fedora boot-stack cinder heat-localip \
+        fedora boot-stack cinder \
         heat-cfntools neutron-network-node stackuser
 fi
 
@@ -49,7 +49,7 @@ if [ ! -f $COMPUTE_IMG ]; then
         -a amd64 \
         -o $IMAGES_DIR/overcloud-compute \
         fedora nova-compute nova-kvm \
-        neutron-openvswitch-agent heat-localip heat-cfntools stackuser
+        neutron-openvswitch-agent heat-cfntools stackuser
 fi
 
 # MACS must be set for setup-baremetal to work
