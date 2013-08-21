@@ -66,11 +66,6 @@ dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
 
 popd
 
-# Keystone is not installing babel for some reason
-sudo /opt/stack/venvs/keystone/bin/pip install -U babel
-# Same for neutron
-sudo /opt/stack/venvs/neutron/bin/pip install -U babel
-
 # sudo run from nova rootwrap complains about no tty
 sudo sed -i "s/Defaults    requiretty/# Defaults    requiretty/" /etc/sudoers
 
