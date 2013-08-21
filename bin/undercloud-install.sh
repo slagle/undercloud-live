@@ -24,19 +24,29 @@ pushd /opt/stack
 
 git clone https://github.com/slagle/python-dib-elements.git
 git clone https://github.com/slagle/undercloud-live.git
-pushd undercloud-live
-git checkout latest
-popd
+
 git clone https://github.com/slagle/tripleo-incubator.git
 pushd tripleo-incubator
 # we have to continue to use a branch here for x86_64 to work, and our other
 # undercloud changes
 git checkout undercloud-live
 popd
+
 git clone https://github.com/openstack/diskimage-builder.git
-git clone https://github.com/openstack/tripleo-image-elements.git
+git clone https://github.com/slagle/tripleo-image-elements.git
+pushd tripleo-image-elements
+git checkout undercloud-live
+popd
+
 git clone https://github.com/openstack/tripleo-heat-templates.git
+pushd tripleo-heat-templates
+git checkout c34e381a46ea6808256abb3300760cb422192869
+popd
+
 git clone https://github.com/tripleo/bm_poseur
+pushd bm_poseur
+git checkout 13c65747f50bda0cec4e90cc37aed6679a70da95
+popd
 
 sudo pip install -e python-dib-elements
 sudo pip install -e diskimage-builder
