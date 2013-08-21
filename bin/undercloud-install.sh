@@ -59,7 +59,7 @@ dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
 # selinux enforcing.
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
                 undercloud-live/elements \
-    -e boot-stack nova-baremetal stackuser \
+    -e boot-stack nova-baremetal stackuser heat-cfntools \
        undercloud-live-config selinux-permissive \
     -k install \
     -i
