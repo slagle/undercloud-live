@@ -8,10 +8,11 @@ source $HOME/undercloudrc
 
 export UNDERCLOUD_IP=192.0.2.1
 SERVICE_TOKEN=unset /opt/stack/tripleo-incubator/scripts/setup-endpoints $UNDERCLOUD_IP
-/opt/stack/tripleo-incubator/scripts/setup-neutron 192.0.2.5 192.0.2.24 192.0.2.0/24 $UNDERCLOUD_IP ctlplane
 
 # Adds default ssh key to nova
 /opt/stack/tripleo-incubator/scripts/user-config
+
+/opt/stack/tripleo-incubator/scripts/setup-neutron 192.0.2.5 192.0.2.24 192.0.2.0/24 $UNDERCLOUD_IP ctlplane
 
 cat /opt/stack/boot-stack/virtual-power-key.pub >> ~/.ssh/authorized_keys
 
