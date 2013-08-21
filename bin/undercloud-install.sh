@@ -51,14 +51,14 @@ dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
     -k pre-install \
     -i
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
-    -e source-repositories boot-stack \
+    -e source-repositories boot-stack nova-baremetal \
     -k extra-data \
     -i
 # selinux-permissive is included b/c rabbitmq-server does not start with
 # selinux enforcing.
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
                 undercloud-live/elements \
-    -e boot-stack nova-baremetal heat-localip heat-cfntools stackuser \
+    -e boot-stack nova-baremetal stackuser \
        undercloud-live-config selinux-permissive \
     -k install \
     -i
