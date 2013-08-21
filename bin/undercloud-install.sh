@@ -33,6 +33,10 @@ git checkout undercloud-live
 popd
 
 git clone https://github.com/openstack/diskimage-builder.git
+pushd diskimage-builder
+git checkout adb7ede8d23c27659b634e3d3942c5de10ab9c3a
+popd
+
 git clone https://github.com/slagle/tripleo-image-elements.git
 pushd tripleo-image-elements
 git checkout undercloud-live
