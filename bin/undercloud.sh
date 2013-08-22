@@ -5,6 +5,14 @@ set -eux
 mkdir -p $HOME/.undercloud-live
 LOG=$HOME/.undercloud-live/undercloud.log
 
+PIP_DOWNLOAD_CACHE=${PIP_DOWNLOAD_CACHE:-""}
+
+if [ -z "$PIP_DOWNLOAD_CACHE" ]; then
+    mkdir -p $HOME/.cache/pip
+    PIP_DOWNLOAD_CACHE=$HOME/.cache/pip
+    export PIP_DOWNLOAD_CACHE
+fi
+
 # This provides the unbuffer command
 sudo yum -y install expect
 
