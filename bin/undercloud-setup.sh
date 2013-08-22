@@ -6,6 +6,9 @@ set -eux
 
 source $HOME/undercloudrc
 
+# Make sure we have the latest $PATH set.
+source /etc/profile.d/tripleo-incubator-scripts.sh
+
 export UNDERCLOUD_IP=192.0.2.1
 SERVICE_TOKEN=unset /opt/stack/tripleo-incubator/scripts/setup-endpoints $UNDERCLOUD_IP
 
