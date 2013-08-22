@@ -31,6 +31,8 @@ unbuffer $(dirname $0)/undercloud-network.sh 2>&1 | tee -a $LOG
 unbuffer sudo systemctl daemon-reload 2>&1 | tee -a $LOG
 unbuffer sudo os-refresh-config 2>&1 | tee -a $LOG
 
+# Need to wait for services to finish coming up
+sleep 10
 unbuffer $(dirname $0)/undercloud-setup.sh 2>&1 | tee -a $LOG
 
 echo "undercloud.sh run complete."
