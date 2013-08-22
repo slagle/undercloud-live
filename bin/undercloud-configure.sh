@@ -66,6 +66,10 @@ sudo service openvswitch restart
 # this often reports failure, even though the service is up
 sudo service rabbitmq-server restart || true
 
+# Make sure sshd is enabled and started by default
+sudo systemctl enable sshd
+sudo systemctl start sshd
+
 sudo cp /root/stackrc $HOME/undercloudrc
 source $HOME/undercloudrc
 
