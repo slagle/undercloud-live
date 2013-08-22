@@ -36,8 +36,7 @@ continue or not.  This is for debugging purposes.
 Once the script has completed, you should have a functioning undercloud.  At
 this point, you would move onto the next steps of building images and
 deploying an overcloud.  These steps are also scripted in the
-undercloud-images.sh and  
-undercloud-deploy-overcloud.sh scripts.  You can
+undercloud-images.sh and undercloud-deploy-overcloud.sh scripts.  You can
 just run these scripts if you prefer to do that instead:
 
     $ undercloud-live/bin/undercloud-images.sh
