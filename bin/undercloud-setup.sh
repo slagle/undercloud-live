@@ -4,6 +4,9 @@ set -eux
 
 # The commands in this script require a running, configured cloud.
 
+# exec the script to pick up new groups (libvirtd in particular)
+exec sudo su -l $USER $0
+
 source $HOME/undercloudrc
 
 # Make sure we have the latest $PATH set.

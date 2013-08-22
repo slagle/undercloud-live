@@ -4,6 +4,9 @@ set -eux
 
 # This script needs to be rerun if you reboot the undercloud.
 
+# exec the script to pick up new groups (libvirtd in particular)
+exec sudo su -l $USER $0
+
 PUBLIC_INTERFACE=${PUBLIC_INTERFACE:-ucl0}
 
 sudo sed -i "s/bridge name='brbm'/bridge name='br-ctlplane'/" /opt/stack/tripleo-incubator/templates/brbm.xml
