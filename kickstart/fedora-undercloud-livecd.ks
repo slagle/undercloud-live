@@ -28,7 +28,6 @@ python-pip
 mkdir -p $INSTALL_ROOT/opt/stack/undercloud-live
 cp -t $INSTALL_ROOT/opt/stack/undercloud-live/ \
     $UNDERCLOUD_LIVE_ROOT/undercloud-live/bin/undercloud-install.sh 
-    $UNDERCLOUD_LIVE_ROOT/undercloud-live/bin/undercloud-init.sh 
 
 %end
 ##############################################################################
@@ -48,22 +47,6 @@ echo nameserver 8.8.8.8 > /etc/resolv.conf
 
 # setup users to be able to run sudo with no password
 sed -i "s/# %wheel/%wheel/" /etc/sudoers
-
-cat > /etc/rc.d/init.d/undercloud-live-init << EOF
-#!/bin/bash
-#
-# undercloud-live-init: Undercloud live init script.
-#
-# chkconfig: 345 50 50
-# description: Undercloud live init script.
-
-/opt/stack/undercloud-live/undercloud-init.sh
-
-EOF
-
-chmod 755 /etc/rc.d/init.d/undercloud-live-init
-/sbin/restorecon /etc/rc.d/init.d/undercloud-live-init
-/sbin/chkconfig --add undercloud-live-init
 
 %end
 ##############################################################################
