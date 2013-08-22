@@ -42,20 +42,11 @@ pushd diskimage-builder
 git checkout 9211a7fecbadc13e8254085133df1e3b53f150d8
 popd
 
-git clone https://github.com/slagle/tripleo-image-elements.git
-pushd tripleo-image-elements
-git checkout undercloud-live
-popd
+git clone https://github.com/openstack/tripleo-image-elements.git
 
 git clone https://github.com/openstack/tripleo-heat-templates.git
-pushd tripleo-heat-templates
-git checkout c34e381a46ea6808256abb3300760cb422192869
-popd
 
 git clone https://github.com/tripleo/bm_poseur
-pushd bm_poseur
-git checkout 13c65747f50bda0cec4e90cc37aed6679a70da95
-popd
 
 sudo pip install -e python-dib-elements
 sudo pip install -e diskimage-builder
