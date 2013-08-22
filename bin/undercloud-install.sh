@@ -2,6 +2,11 @@
 
 set -eux
 
+if [ -f /opt/stack/undercloud-live/.undercloud-install ]; then
+    echo undercloud-install.sh has already run, exiting.
+    exit
+fi
+
 # Make sure pip is installed
 sudo yum install -y python-pip
 
@@ -107,3 +112,5 @@ sudo sed -i "s/SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config
 
 # Overcloud heat template
 sudo make -C /opt/stack/tripleo-heat-templates overcloud.yaml
+
+touch /opt/stack/undercloud-live/.undercloud-install 

@@ -4,6 +4,10 @@ set -eux
 
 # The commands in this script require a running, configured cloud.
 
+if [ -f /opt/stack/undercloud-live/.undercloud-setup ]; then
+    exit
+fi
+
 source $HOME/undercloudrc
 
 # Make sure we have the latest $PATH set.
@@ -21,3 +25,5 @@ cat /opt/stack/boot-stack/virtual-power-key.pub >> ~/.ssh/authorized_keys
 
 # Baremetal setup
 /opt/stack/tripleo-incubator/scripts/create-nodes 1 1024 10 2
+
+touch /opt/stack/undercloud-live/.undercloud-setup

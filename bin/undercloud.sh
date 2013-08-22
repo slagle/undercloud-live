@@ -18,6 +18,12 @@ sudo yum -y install expect
 
 unbuffer $(dirname $0)/undercloud-install.sh 2>&1 | tee -a $LOG
 unbuffer $(dirname $0)/undercloud-configure.sh 2>&1 | tee -a $LOG
+
+# need to exec to pick up the new group
+if ! id | grep libvirtd; then
+    exec sudo su -l $USER $0
+fi
+
 unbuffer $(dirname $0)/undercloud-network.sh 2>&1 | tee -a $LOG
 
 # starts all services and runs os-refresh-config (via os-collect-config
