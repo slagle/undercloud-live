@@ -12,7 +12,20 @@ To get started, clone this repo to your home directory:
     $ git clone https://github.com/slagle/undercloud-live.git
 
 ## bin/undercloud.sh
-Run as current user to configure the current system into an undercloud:
+This script is run as the current user to configure the current system into an
+undercloud.
+
+The undercloud makes use of the default libvirtd network of 192.168.122.0/24.
+If you want to change the network (e.g., you're running the script on a vm
+whose host is already using 192.168.122.0/24), edit
+undercloud-live/bin/custom.sh, and then source that file:
+
+    # Edit undercloud-live/bin/custom-network.sh, and set the environment
+    # variables in the file to your desired settings.
+    $ vi undercloud-live/bin/custom-network.sh
+    $ source undercloud-live/bin/custom-network.sh
+
+Run the undercloud script itself:
 
     $ undercloud-live/bin/undercloud.sh
 
