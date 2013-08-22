@@ -17,8 +17,8 @@ LIBVIRT_IP_ADDRESS=${LIBVIRT_IP_ADDRESS:-192.168.122.1}
 LIBVIRT_NETWORK_RANGE_START=${LIBVIRT_NETWORK_RANGE_START:-192.168.122.2}
 LIBVIRT_NETWORK_RANGE_END=${LIBVIRT_NETWORK_RANGE_END:-192.168.122.254}
 
-if [ -e /opt/stack/undercloud-live/.undercloud-init ]; then
-    echo undercloud-init has already run, exiting.
+if [ -e /opt/stack/undercloud-live/.undercloud-configure ]; then
+    echo undercloud-configure has already run, exiting.
     exit
 fi
 
@@ -76,7 +76,7 @@ sudo sed -i "s/eth1/$PUBLIC_INTERFACE/g" /var/lib/heat-cfntools/cfn-init-data
 
 sudo sed -i "s/192.168.122.1/$NETWORK/g" /opt/stack/os-config-applier/templates/var/opt/undercloud-live/masquerade
 
-touch /opt/stack/undercloud-live/.undercloud-init
+touch /opt/stack/undercloud-live/.undercloud-configure
 
 if [ -n "$GROUP_ADDED" ]; then
     exec sudo su -l jslagle $0
