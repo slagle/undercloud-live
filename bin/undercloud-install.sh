@@ -107,7 +107,7 @@ EOF
 fi
 
 # rabbitmq-server does not start with selinux enforcing.
-sudo setenforce 0
+# https://bugzilla.redhat.com/show_bug.cgi?id=998682
 sudo sed -i "s/SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config
 
 # Overcloud heat template
