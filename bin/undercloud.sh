@@ -13,7 +13,8 @@ if [ -z "$PIP_DOWNLOAD_CACHE" ]; then
     export PIP_DOWNLOAD_CACHE
 fi
 
-# /var/lock/subsys not always created in F19
+# /var/lock/subsys not always created in F19, and it is needed by openvswitch.
+# See: https://bugzilla.redhat.com/show_bug.cgi?id=986667
 sudo mkdir -p /var/lock/subsys
 
 $(dirname $0)/undercloud-install.sh 2>&1 | tee -a $LOG
