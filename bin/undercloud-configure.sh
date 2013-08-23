@@ -28,12 +28,10 @@ sudo sed -i "s/192.168.122.254/$LIBVIRT_NETWORK_RANGE_END/g" /etc/libvirt/qemu/n
 
 # This libvirtd group modification should be at the top of the script due to
 # the exec.  
-GROUP_ADDED=""
 grep libvirtd /etc/group || sudo groupadd libvirtd
 if ! id | grep libvirtd; then
    echo "adding $USER to group libvirtd"
    sudo usermod -a -G libvirtd $USER
-   GROUP_ADDED=1
 
    if [ "$os" = "redhat" ]; then
        libvirtd_file=/etc/libvirt/libvirtd.conf
@@ -81,7 +79,3 @@ sudo sed -i "s/eth1/$PUBLIC_INTERFACE/g" /var/lib/heat-cfntools/cfn-init-data
 sudo sed -i "s/192.168.122.1/$NETWORK/g" /opt/stack/os-config-applier/templates/var/opt/undercloud-live/masquerade
 
 touch /opt/stack/undercloud-live/.undercloud-configure
-
-if [ -n "$GROUP_ADDED" ]; then
-    exec sudo su -l jslagle $0
-fi
