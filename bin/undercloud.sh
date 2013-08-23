@@ -13,6 +13,9 @@ if [ -z "$PIP_DOWNLOAD_CACHE" ]; then
     export PIP_DOWNLOAD_CACHE
 fi
 
+# /var/lock/subsys not always created in F19
+sudo mkdir -p /var/lock/subsys
+
 $(dirname $0)/undercloud-install.sh 2>&1 | tee -a $LOG
 $(dirname $0)/undercloud-configure.sh 2>&1 | tee -a $LOG
 
