@@ -5,8 +5,11 @@ set -eux
 mkdir -p $HOME/.undercloud-live
 LOG=$HOME/.undercloud-live/undercloud.log
 
-exec > >(tee $LOG)
+exec > >(tee -a $LOG)
 exec 2>&1
+
+echo ##########################################################
+echo Starting run of undercloud.sh at `date`
 
 PIP_DOWNLOAD_CACHE=${PIP_DOWNLOAD_CACHE:-""}
 
