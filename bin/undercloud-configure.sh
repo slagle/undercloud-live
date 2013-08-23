@@ -22,6 +22,9 @@ if [ -e /opt/stack/undercloud-live/.undercloud-configure ]; then
     exit
 fi
 
+# rabbitmq-server does not start with selinux enforcing.
+sudo setenforce 0
+
 sudo sed -i "s/192.168.122.1/$LIBVIRT_IP_ADDRESS/g" /etc/libvirt/qemu/networks/default.xml
 sudo sed -i "s/192.168.122.2/$LIBVIRT_NETWORK_RANGE_START/g" /etc/libvirt/qemu/networks/default.xml
 sudo sed -i "s/192.168.122.254/$LIBVIRT_NETWORK_RANGE_END/g" /etc/libvirt/qemu/networks/default.xml
