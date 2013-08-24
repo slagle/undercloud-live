@@ -1,0 +1,14 @@
+[Unit]
+Description=undercloud-setup
+Requires=os-collect-config.service
+After=os-collect-config.service
+
+[Service]
+Type=oneshot
+# There is a sleep here because os-collect-config exits before all services are
+# actually up and configured.
+ExecStart=/bin/bach -c 'sleep 10 && /opt/stack/undercloud-live/bin/undercloud-setup.sh'
+User=liveuser
+
+[Install]
+WantedBy=multi-user.target

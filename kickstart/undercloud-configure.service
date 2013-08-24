@@ -1,0 +1,13 @@
+[Unit]
+Description=undercloud-configure
+# Requires=livesys.service,livesys-late.service
+# After=livesys.service,livesys-late.service
+Before=os-collect-config.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/stack/undercloud-live/bin/undercloud-configure.sh
+User=liveuser
+
+[Install]
+WantedBy=multi-user.target
