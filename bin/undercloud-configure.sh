@@ -82,4 +82,4 @@ sudo sed -i "s/eth1/$PUBLIC_INTERFACE/g" /var/lib/heat-cfntools/cfn-init-data
 
 sudo sed -i "s/192.168.122.1/$NETWORK/g" /opt/stack/os-config-applier/templates/var/opt/undercloud-live/masquerade
 
-touch /opt/stack/undercloud-live/.undercloud-configure
+sudo touch /opt/stack/undercloud-live/.undercloud-configure
