@@ -7,7 +7,7 @@ Before=os-collect-config.service
 [Service]
 Type=oneshot
 ExecStart=/opt/stack/undercloud-live/bin/undercloud-network.sh
-User=liveuser
+User=stack
 
 [Install]
 WantedBy=multi-user.target

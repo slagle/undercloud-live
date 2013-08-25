@@ -8,7 +8,7 @@ Type=oneshot
 # There is a sleep here because os-collect-config exits before all services are
 # actually up and configured.
 ExecStart=/bin/bash -c 'sleep 10 && /opt/stack/undercloud-live/bin/undercloud-setup.sh'
-User=liveuser
+User=stack
 
 [Install]
 WantedBy=multi-user.target
