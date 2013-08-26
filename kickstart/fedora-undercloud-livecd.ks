@@ -39,6 +39,12 @@ mkdir -p $INSTALL_ROOT/root/.cache/image-create
 cp -r /home/jslagle/.cache/image-create/repository-sources $INSTALL_ROOT/root/.cache/image-create/
 chown -R root.root $INSTALL_ROOT/root/.cache/image-create
 
+# Add cached Fedora Cloud images.
+# TODO: need to come from more permanent location
+cp -t $INSTALL_ROOT/root/.cache/image-create \
+    /home/jslagle/.cache/image-create/fedora-latest.x86_64.qcow2 \
+    /home/jslagle/.cache/image-create/latest-Cloud-x86_64-latest.tgz
+    
 %end
 ##############################################################################
 
@@ -80,7 +86,6 @@ ln -s '/usr/lib/systemd/system/undercloud-setup.service' \
     '/etc/systemd/system/multi-user.target.wants/undercloud-setup.service'
 ln -s '/usr/lib/systemd/system/undercloud-network.service' \
     '/etc/systemd/system/multi-user.target.wants/undercloud-network.service'
-
 
 %end
 ##############################################################################
