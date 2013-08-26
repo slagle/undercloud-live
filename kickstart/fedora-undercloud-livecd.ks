@@ -32,12 +32,12 @@ cd $INSTALL_ROOT/root
 git clone https://github.com/slagle/undercloud-live
 
 # pip is slow, just copy this into the chroot for now
-cp -r /home/jslagle/.cache/image-create/pip $INSTALL_ROOT/var/cache/
-chown -R root.root $INSTALL_ROOT/var/cache/pip
+# cp -r /home/jslagle/.cache/image-create/pip $INSTALL_ROOT/var/cache/
+# chown -R root.root $INSTALL_ROOT/var/cache/pip
 # git clone is slow, just copy into chroot for now
 mkdir -p $INSTALL_ROOT/root/.cache/image-create
-cp -r /home/jslagle/.cache/image-create/repository-sources $INSTALL_ROOT/root/.cache/image-create/
-chown -R root.root $INSTALL_ROOT/root/.cache/image-create
+# cp -r /home/jslagle/.cache/image-create/repository-sources $INSTALL_ROOT/root/.cache/image-create/
+# chown -R root.root $INSTALL_ROOT/root/.cache/image-create
 
 # Add cached Fedora Cloud images.
 # TODO: need to come from more permanent location
