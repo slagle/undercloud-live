@@ -41,9 +41,9 @@ chown -R root.root $INSTALL_ROOT/root/.cache/image-create
 
 # Add cached Fedora Cloud images.
 # TODO: need to come from more permanent location
-cp -t $INSTALL_ROOT/root/.cache/image-create \
-    /home/jslagle/.cache/image-create/fedora-latest.x86_64.qcow2 \
-    /home/jslagle/.cache/image-create/latest-Cloud-x86_64-latest.tgz
+cd $INSTALL_ROOT/root/.cache/image-create
+curl -O http://file.rdu.redhat.com/~jslagle/latest-Cloud-x86_64-latest.tgz
+curl -o fedora-latest.x86_64.qcow2 http://file.rdu.redhat.com/~jslagle/Fedora-x86_64-19-20130627-sda.qcow2
     
 %end
 ##############################################################################
