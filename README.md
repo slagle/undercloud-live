@@ -74,14 +74,47 @@ undercloud, just copy them into /opt/stack/images.
 kickstart file that can be used to build an undercloud Live CD.
 
 1. install fedora-kickstarts and livecd-tools if needed
-1. set $UNDERCLOUD_LIVE_ROOT to the directory where undercloud-live is checked out
-1. livecd-creator --verbose  --fslabel=Fedora-Undercloud-LiveCD --cache=/var/cache/live --releasever=19 --config=/path/to/undercloud-live/kickstart/fedora-undercloud-livecd.ks
+1. livecd-creator --verbose  --fslabel=Fedora-Undercloud-LiveCD --cache=/var/cache/yum/x86_64/19 --releasever=19 --config=/path/to/undercloud-live/kickstart/fedora-undercloud-livecd.ks
 
 This will produce a Fedora-Undercloud-LiveCD.iso file in the current directory.
 To test it simply run:
 
-    qemu-kvm -m 1024 Fedora-Undercloud-LiveCD.iso 
-(you can also run it with 512 of ram, but it will be quite a bit slower)
+    qemu-kvm -m 2048 Fedora-Undercloud-LiveCD.iso 
+(you can run it with less ram, but it will be quite a bit slower)
+
+## Running the live cd
+
+To use the live cd, follow the steps below.
+
+1. Boot the live cd on physical hardware or in a vm with at least 4gb of ram.
+1. The libvirtd service on the undercloud uses the default network of
+   192.168.122.0/24.  If this is already in use in your enviornment, you need
+   to change it.  Here's an example of doing that if you wanted to switch the
+   subnet to 123 instead of 122:
+
+    # run these commands as root
+    sed -i "s/122/123/g" /etc/libvirt/qemu/networks/default.xml
+    systemctl restart libvirtd
+    virsh net-destroy default
+    virsh net-start default
+1. Open a terminal and switch to the stack user:
+    su -
+    su - stack
+1. Source the undercloud configuration
+    source undercloudrc
+
+From here, you can use all the normal openstack clients to interact with the
+running undercloud services.
+
+To get going on deploying an overcloud, you will want to build images and start
+the overcloud.  There are scripts to do these pieces as well, but we may change
+that into just documentation instructions so that users get the full experience
+of setting up an overcloud themselves.  The scripts are here:
+    /opt/stack/undercloud-live/bin/undercloud-images.sh
+    /opt/stack/undercloud-live/bin/undercloud-deploy-overcloud.sh
+
+
+
 
 # References
 
