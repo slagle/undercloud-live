@@ -92,16 +92,18 @@ To use the live cd, follow the steps below.
    to change it.  Here's an example of doing that if you wanted to switch the
    subnet to 123 instead of 122:
 
-    # run these commands as root
-    sed -i "s/122/123/g" /etc/libvirt/qemu/networks/default.xml
-    systemctl restart libvirtd
-    virsh net-destroy default
-    virsh net-start default
+        # run these commands as root
+        sed -i "s/122/123/g" /etc/libvirt/qemu/networks/default.xml
+        systemctl restart libvirtd
+        virsh net-destroy default
+        virsh net-start default
 1. Open a terminal and switch to the stack user:
-    su -
-    su - stack
+
+        su -
+        su - stack
 1. Source the undercloud configuration
-    source undercloudrc
+
+        source undercloudrc
 
 From here, you can use all the normal openstack clients to interact with the
 running undercloud services.
@@ -110,6 +112,7 @@ To get going on deploying an overcloud, you will want to build images and start
 the overcloud.  There are scripts to do these pieces as well, but we may change
 that into just documentation instructions so that users get the full experience
 of setting up an overcloud themselves.  The scripts are here:
+
     /opt/stack/undercloud-live/bin/undercloud-images.sh
     /opt/stack/undercloud-live/bin/undercloud-deploy-overcloud.sh
 
