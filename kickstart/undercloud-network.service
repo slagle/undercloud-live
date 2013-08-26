@@ -11,3 +11,4 @@ User=stack
 
 [Install]
 WantedBy=multi-user.target
+RequiredBy=os-collect-config.service

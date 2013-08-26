@@ -1,7 +1,5 @@
 [Unit]
 Description=undercloud-configure
-# Requires=livesys.service,livesys-late.service
-# After=livesys.service,livesys-late.service
 Before=os-collect-config.service
 
 [Service]
@@ -11,3 +9,4 @@ User=stack
 
 [Install]
 WantedBy=multi-user.target
+RequiredBy=os-collect-config.service
