@@ -9,6 +9,7 @@ Type=oneshot
 # actually up and configured.
 ExecStart=/bin/bash -c 'sleep 20 && /opt/stack/undercloud-live/bin/undercloud-setup.sh'
 User=stack
+SupplementaryGroups=libvirtd
 
 [Install]
 WantedBy=multi-user.target
