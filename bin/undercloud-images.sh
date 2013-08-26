@@ -13,8 +13,10 @@ COMPUTE_IMG=$IMAGES_DIR/overcloud-compute.qcow2
 BM_KERNEL=$IMAGES_DIR/deploy-ramdisk.kernel
 BM_INITRAMFS=$IMAGES_DIR/deploy-ramdisk.initramfs
 ELEMENTS_PATH=/opt/stack/tripleo-image-elements/elements
+DIB_OFFLINE=1
 
 export ELEMENTS_PATH
+export DIB_OFFLINE
 
 mkdir -p $IMAGES_DIR
 pushd $IMAGES_DIR
