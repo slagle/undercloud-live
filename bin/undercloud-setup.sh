@@ -4,12 +4,6 @@ set -eux
 
 # The commands in this script require a running, configured cloud.
 
-# If /opt/stack/images is not in /etc/fstab, then we must have installed to
-# disk and therefore, this script has already run.
-if [ ! `grep /opt/stack/images /etc/fstab` ]; then
-    sudo touch /opt/stack/undercloud-live/.undercloud-setup
-fi
-
 if [ -f /opt/stack/undercloud-live/.undercloud-setup ]; then
     exit
 fi
