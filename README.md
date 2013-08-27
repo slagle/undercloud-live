@@ -125,9 +125,9 @@ A couple of points to remember as the Live CD is used:
    live cd to disk.  When you do this, any changes that you had made, will be
    lost and you'll need to start over with image building, etc when you boot
    the now installed undercloud.
-1. There is only 512mb worth of changes that can be applied to the root
-   filesystem and this fills up rather quickly with just logs, etc.  As such,
-   the following directories are all tmpfs mounted:
+1. When running the live cd there is only 512mb worth of changes that can be
+   applied to the root filesystem and this fills up rather quickly with just
+   logs, etc.  As such, the following directories are all tmpfs mounted:
  1. /home/stack/.cache/image-create/ccache
  1. /home/stack/.cache/image-create/yum
  1. /opt/stack/images
