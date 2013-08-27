@@ -6,7 +6,7 @@ Before=os-collect-config.service
 
 [Service]
 Type=oneshot
-ExecStart=/bin/bash -c 'source /etc/profile.d/virsh.sh && /opt/stack/undercloud-live/bin/undercloud-network.sh'
+ExecStart=/bin/sudo /opt/stack/undercloud-live/bin/undercloud-network.sh
 User=stack
 
 [Install]
