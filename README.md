@@ -121,6 +121,10 @@ of setting up an overcloud themselves.  The scripts are here:
 
 A couple of points to remember as the Live CD is used:
 
+1. You can use the Install to Hard Drive shortcut on the desktop to install the
+   live cd to disk.  When you do this, any changes that you had made, will be
+   lost and you'll need to start over with image building, etc when you boot
+   the now installed undercloud.
 1. There is only 512mb worth of changes that can be applied to the root
    filesystem and this fills up rather quickly with just logs, etc.  As such,
    the following directories are all tmpfs mounted:
