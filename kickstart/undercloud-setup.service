@@ -7,7 +7,7 @@ After=os-collect-config.service
 Type=oneshot
 # There is a sleep here because os-collect-config exits before all services are
 # actually up and configured.
-ExecStart=/bin/bash -c 'sleep 40 && /opt/stack/undercloud-live/bin/undercloud-setup.sh'
+ExecStart=/bin/bash -c 'sleep 60 && /opt/stack/undercloud-live/bin/undercloud-setup.sh'
 User=stack
 SupplementaryGroups=libvirtd
 
