@@ -111,5 +111,8 @@ tmpfs /var/lib/nova/instances tmpfs rw,uid=$NOVA_ID,gid=$NOVA_GROUP_ID 0 0
 tmpfs /var/lib/libvirt/images tmpfs rw,uid=0,gid=0 0 0
 EOF
 
+# we need grub2 back (removed by dib elements)
+yum -y install grub2-tools grub2 grub2-efi
+
 %end
 ##############################################################################
