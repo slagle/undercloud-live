@@ -97,11 +97,14 @@ ln -s '/usr/lib/systemd/system/undercloud-network.service' \
 mkdir -p /opt/stack/images
 export STACK_ID=`id -u stack`
 export GLANCE_ID=`id -u glance`
+export NOVA_ID=`id -u nova`
 cat << EOF >> /etc/fstab
 tmpfs /home/stack/.cache/image-create/ccache tmpfs rw,uid=$STACK_ID,gid=$STACK_ID 0 0
 tmpfs /home/stack/.cache/image-create/yum tmpfs rw,uid=$STACK_ID,gid=$STACK_ID 0 0
 tmpfs /opt/stack/images tmpfs rw,uid=$STACK_ID,gid=$STACK_ID 0 0
 tmpfs /var/lib/glance/images tmpfs rw,uid=$GLANCE_ID,gid=$GLANCE_ID 0 0
+tmpfs /var/lib/nova/instances tmpfs rw,uid=$NOVA_ID,gid=$NOVA_ID 0 0
+tmpfs /var/lib/libvirt/images tmpfs rw,uid=0,gid=0 0 0
 EOF
 
 %end
