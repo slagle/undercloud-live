@@ -97,6 +97,9 @@ To use the live cd, follow the steps below.
         systemctl restart libvirtd
         virsh net-destroy default
         virsh net-start default
+        # Update nova compute configuration
+        sed -i "s/192.168.122.1/192.168.123.1/g" /etc/nova/nova.conf
+        systemctl nova-compute restart
 1. Open a terminal and switch to the stack user:
 
         su -
