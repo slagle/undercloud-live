@@ -96,14 +96,17 @@ ln -s '/usr/lib/systemd/system/undercloud-network.service' \
 # /var/lib/glance/images
 mkdir -p /opt/stack/images
 export STACK_ID=`id -u stack`
+export STACK_GROUP_ID=`id -g stack`
 export GLANCE_ID=`id -u glance`
+export GLANCE_GROUP_ID=`id -g glance`
 export NOVA_ID=`id -u nova`
+export NOVA_GROUP_ID=`id -g nova`
 cat << EOF >> /etc/fstab
-tmpfs /home/stack/.cache/image-create/ccache tmpfs rw,uid=$STACK_ID,gid=$STACK_ID 0 0
-tmpfs /home/stack/.cache/image-create/yum tmpfs rw,uid=$STACK_ID,gid=$STACK_ID 0 0
-tmpfs /opt/stack/images tmpfs rw,uid=$STACK_ID,gid=$STACK_ID 0 0
-tmpfs /var/lib/glance/images tmpfs rw,uid=$GLANCE_ID,gid=$GLANCE_ID 0 0
-tmpfs /var/lib/nova/instances tmpfs rw,uid=$NOVA_ID,gid=$NOVA_ID 0 0
+tmpfs /home/stack/.cache/image-create/ccache tmpfs rw,uid=$STACK_ID,gid=$STACK_GROUP_ID 0 0
+tmpfs /home/stack/.cache/image-create/yum tmpfs rw,uid=$STACK_ID,gid=$STACK_GROUP_ID 0 0
+tmpfs /opt/stack/images tmpfs rw,uid=$STACK_ID,gid=$STACK_GROUP_ID 0 0
+tmpfs /var/lib/glance/images tmpfs rw,uid=$GLANCE_ID,gid=$GLANCE_GROUP_ID 0 0
+tmpfs /var/lib/nova/instances tmpfs rw,uid=$NOVA_ID,gid=$NOVA_GROUP_ID 0 0
 tmpfs /var/lib/libvirt/images tmpfs rw,uid=0,gid=0 0 0
 EOF
 
