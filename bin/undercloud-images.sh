@@ -13,10 +13,8 @@ COMPUTE_IMG=$IMAGES_DIR/overcloud-compute.qcow2
 BM_KERNEL=$IMAGES_DIR/deploy-ramdisk.kernel
 BM_INITRAMFS=$IMAGES_DIR/deploy-ramdisk.initramfs
 ELEMENTS_PATH=/opt/stack/tripleo-image-elements/elements
-DIB_OFFLINE=1
 
 export ELEMENTS_PATH
-export DIB_OFFLINE
 
 mkdir -p $IMAGES_DIR
 pushd $IMAGES_DIR
@@ -34,6 +32,7 @@ popd
 if [ ! -f $BM_KERNEL ]; then
     /opt/stack/diskimage-builder/bin/ramdisk-image-create \
         -a amd64 \
+        --offline \
         -o $IMAGES_DIR/deploy-ramdisk \
         fedora deploy
 fi
@@ -41,6 +40,7 @@ fi
 if [ ! -f $CONTROL_IMG ]; then
     /opt/stack/diskimage-builder/bin/disk-image-create \
         -a amd64 \
+        --offline \
         -o $IMAGES_DIR/overcloud-control \
         fedora boot-stack cinder \
         heat-cfntools neutron-network-node stackuser
@@ -49,6 +49,7 @@ fi
 if [ ! -f $COMPUTE_IMG ]; then
     /opt/stack/diskimage-builder/bin/disk-image-create \
         -a amd64 \
+        --offline \
         -o $IMAGES_DIR/overcloud-compute \
         fedora nova-compute nova-kvm \
         neutron-openvswitch-agent heat-cfntools stackuser

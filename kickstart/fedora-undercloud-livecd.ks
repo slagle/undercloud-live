@@ -1,6 +1,6 @@
 # Fedora TripleO Undercloud
 
-%include /usr/share/spin-kickstarts/fedora-livecd-desktop.ks
+%include /usr/share/spin-kickstarts/fedora-livecd-xfce.ks
 
 # Need bigger / partition than default
 part / --size 6144 --fstype ext4
