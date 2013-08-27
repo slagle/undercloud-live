@@ -119,6 +119,17 @@ of setting up an overcloud themselves.  The scripts are here:
     /opt/stack/undercloud-live/bin/undercloud-images.sh
     /opt/stack/undercloud-live/bin/undercloud-deploy-overcloud.sh
 
+A couple of points to remember as the Live CD is used:
+
+1. There is only 512mb worth of changes that can be applied to the root
+   filesystem and this fills up rather quickly with just logs, etc.  As such,
+   the following directories are all tmpfs mounted:
+ 1. /home/stack/.cache/image-create/ccache
+ 1. /home/stack/.cache/image-create/yum
+ 1. /opt/stack/images
+ 1. /var/lib/glance/images
+ 1. /var/lib/libvirt/images
+ 1. /var/lib/nova/instances
 
 
 
