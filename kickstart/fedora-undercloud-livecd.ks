@@ -69,9 +69,9 @@ export PIP_DOWNLOAD_CACHE=/var/cache/pip
 # move diskimage-builder cache into stack user's home dir so it can be reused
 # during image builds.
 mkdir -p /home/stack/.cache
+mv /root/.cache/image-create /home/stack/.cache/
 mkdir -p /home/stack/.cache/image-create/yum
 mkdir -p /home/stack/.cache/image-create/ccache
-mv /root/.cache/image-create /home/stack/.cache/
 chown -R stack.stack /home/stack/.cache
 
 # setup users to be able to run sudo with no password
@@ -89,13 +89,19 @@ ln -s '/usr/lib/systemd/system/undercloud-setup.service' \
 ln -s '/usr/lib/systemd/system/undercloud-network.service' \
     '/etc/systemd/system/multi-user.target.wants/undercloud-network.service'
 
-# tmpfs mount cache dirs for yum and ccache, and images dir
+# tmpfs mount dirs for:
+# yum cache
+# ccache
+# /opt/stack/images
+# /var/lib/glance/images
 mkdir -p /opt/stack/images
 export STACK_ID=`id -u stack`
+export GLANCE_ID=`id -u glance`
 cat << EOF >> /etc/fstab
 tmpfs /home/stack/.cache/image-create/ccache tmpfs rw,uid=$STACK_ID,gid=$STACK_ID 0 0
 tmpfs /home/stack/.cache/image-create/yum tmpfs rw,uid=$STACK_ID,gid=$STACK_ID 0 0
 tmpfs /opt/stack/images tmpfs rw,uid=$STACK_ID,gid=$STACK_ID 0 0
+tmpfs /var/lib/glance/images tmpfs rw,uid=$GLANCE_ID,gid=$GLANCE_ID 0 0
 EOF
 
 %end
