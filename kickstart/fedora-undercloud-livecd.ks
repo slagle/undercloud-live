@@ -96,6 +96,8 @@ ln -s '/usr/lib/systemd/system/undercloud-network.service' \
 # /opt/stack/images
 # /var/lib/glance/images
 mkdir -p /opt/stack/images
+chgrp stack /opt/stack/images
+chmod 775 /opt/stack/images
 export STACK_ID=`id -u stack`
 export STACK_GROUP_ID=`id -g stack`
 export GLANCE_ID=`id -u glance`
