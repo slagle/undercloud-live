@@ -51,7 +51,7 @@ undercloud, just copy them into /opt/stack/images.
 * Only works on Fedora 19 x86_64
 * sudo as root ability
 
-### Caveats
+### Caveats ###
 * undercloud.sh deploys software from git repositories and directly from PyPi.
   This will be updated to use rpm's at a later date.
 * The git repositories that are checked out under /opt/stack are set to
@@ -82,11 +82,39 @@ To test it simply run:
     qemu-kvm -m 2048 Fedora-Undercloud-LiveCD.iso
 (you can run it with less ram, but it will be quite a bit slower)
 
-## Running the live cd
+## Live CD
 
+The Live CD provides a full working undercloud environment.  Note that the [Caveats][] from the section above 
+apply to the Live CD as well as it is built using the same installation scripts.
+
+Also keep in mind that any changes made to the filesystem while running the Live CD are lost after you reboot
+or use the install to disk method.  Therefore, if you plan to install, I recommend doing this first before
+building images on your undercloud, etc.
+
+### Requirements
+1. RAM
+ * >= 8GB if you plan to immediately install the live cd to disk
+ * >= 16GB if you plan to just run the live cd and immediately start building images, etc.
+1. Disk (if you plan to install)
+ * >= 25GB (the bigger the better obviously if you plan to upload/build many images)
+1. Nested KVM (if you plan to use a vm for the Live CD itself)
+ * setup up Nested KVM (see references below)
+ * if you don't want to use Nested KVM, make sure you switch all your vm's to use just 
+   qemu virtualization in their libvirt xml.
+
+### Running/Installing
 To use the live cd, follow the steps below.
 
-1. Boot the live cd on physical hardware or in a vm with at least 4gb of ram.
+1. Boot the live cd.
+ * The default account is liveuser.  However, you can use stack/stack for ssh access, etc.
+ * If you plan to install to disk, do so after the boot is finished. Use the icon on the desktop, or ssh in with 
+   X forwarding and run /sbin/liveinst.
+ * Once the install has finished, reboot and continue on with the next step. After rebooting, you 
+   will need to use stack/stack to login as liveuser no longer exists.
+1. Open a terminal and switch to the stack user (if you aren't already):
+
+        su -
+        su - stack
 1. The libvirtd service on the undercloud uses the default network of
    192.168.122.0/24.  If this is already in use in your enviornment, you need
    to change it.  Here's an example of doing that if you wanted to switch the
@@ -100,10 +128,8 @@ To use the live cd, follow the steps below.
         # Update nova compute configuration
         sed -i "s/192.168.122.1/192.168.123.1/g" /etc/nova/nova.conf
         systemctl nova-compute restart
-1. Open a terminal and switch to the stack user:
-
-        su -
-        su - stack
+        # Update embedded heat meatdata (it gets applied on every boot)
+        sed -i "s/192.168.122.1/192.168.123.1/g" /var/lib/heat-cfntools/cfn-init-data
 1. Source the undercloud configuration
 
         source undercloudrc
