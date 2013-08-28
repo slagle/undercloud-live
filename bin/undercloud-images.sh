@@ -34,7 +34,7 @@ if [ ! -f $BM_KERNEL ]; then
         -a amd64 \
         --offline \
         -o $IMAGES_DIR/deploy-ramdisk \
-        fedora deploy
+        fedora deploy pip-cache
 fi
 
 if [ ! -f $CONTROL_IMG ]; then
@@ -43,7 +43,7 @@ if [ ! -f $CONTROL_IMG ]; then
         --offline \
         -o $IMAGES_DIR/overcloud-control \
         fedora boot-stack cinder \
-        heat-cfntools neutron-network-node stackuser
+        heat-cfntools neutron-network-node stackuser pip-cache
 fi
 
 if [ ! -f $COMPUTE_IMG ]; then
@@ -52,7 +52,7 @@ if [ ! -f $COMPUTE_IMG ]; then
         --offline \
         -o $IMAGES_DIR/overcloud-compute \
         fedora nova-compute nova-kvm \
-        neutron-openvswitch-agent heat-cfntools stackuser
+        neutron-openvswitch-agent heat-cfntools stackuser pip-cache
 fi
 
 /opt/stack/undercloud-live/bin/undercloud-baremetal.sh
