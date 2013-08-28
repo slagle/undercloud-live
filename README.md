@@ -4,7 +4,7 @@ Tools and scripts to build an undercloud Live CD and configure an already
 running Fedora 19 x86_64 system into an undercloud.  The script is meant to be run on
 physical hardware.  However, it can also be used on a vm.  When using a vm you need to make
 sure that the vm you intend to configure as a undercloud has been configured to
-use nested kvm (see [here][1] and [here][2]).
+use nested kvm (see [References](#references)).
 
 To get started, clone this repo to your home directory:
 
@@ -169,5 +169,6 @@ A couple of points to remember as the Live CD is used:
 
 # References
 
-[1]: http://www.server-world.info/en/note?os=Fedora_19&p=kvm&f=8
-[2]: https://fedoraproject.org/wiki/QA:Testcase_KVM_nested_virt
+## Nested KVM Setup Help
+1. http://www.server-world.info/en/note?os=Fedora_19&p=kvm&f=8
+1. https://fedoraproject.org/wiki/QA:Testcase_KVM_nested_virt
