@@ -91,6 +91,10 @@ Also keep in mind that any changes made to the filesystem while running the Live
 or use the install to disk method.  Therefore, if you plan to install, I recommend doing this first before
 building images on your undercloud, etc.
 
+Currently the Live CD uses an XFCE based desktop for no particular reason other than that it builds faster, uses
+less disk space, and has a much more responsive desktop when testing from within a vm.  It can be switched to Gnome
+later.
+
 ### Requirements
 1. RAM
  * >= 8GB if you plan to immediately install the live cd to disk
