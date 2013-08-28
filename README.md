@@ -51,7 +51,7 @@ undercloud, just copy them into /opt/stack/images.
 * Only works on Fedora 19 x86_64
 * sudo as root ability
 
-### Caveats ###
+### Caveats
 * undercloud.sh deploys software from git repositories and directly from PyPi.
   This will be updated to use rpm's at a later date.
 * The git repositories that are checked out under /opt/stack are set to
@@ -84,7 +84,7 @@ To test it simply run:
 
 ## Live CD
 
-The Live CD provides a full working undercloud environment.  Note that the [Caveats][] from the section above 
+The Live CD provides a full working undercloud environment.  Note that the [Caveats](#caveats) from the section above 
 apply to the Live CD as well as it is built using the same installation scripts.
 
 Also keep in mind that any changes made to the filesystem while running the Live CD are lost after you reboot
