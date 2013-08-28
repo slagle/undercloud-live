@@ -39,7 +39,7 @@ popd
 
 git clone https://github.com/openstack/diskimage-builder.git
 pushd diskimage-builder
-git checkout 473d08cb84fdbb50e6bcc3e741906afc726e2fb3
+git checkout 9211a7fecbadc13e8254085133df1e3b53f150d8
 popd
 
 git clone https://github.com/slagle/tripleo-image-elements.git
