@@ -102,7 +102,7 @@ later.
 1. Disk (if you plan to install)
  * >= 25GB (the bigger the better obviously if you plan to upload/build many images)
 1. Nested KVM (if you plan to use a vm for the Live CD itself)
- * setup up Nested KVM (see references below)
+ * setup up Nested KVM (see [References](#references)  below)
  * if you don't want to use Nested KVM, make sure you switch all your vm's to use just 
    qemu virtualization in their libvirt xml.
 
