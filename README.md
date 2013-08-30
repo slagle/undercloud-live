@@ -74,7 +74,7 @@ undercloud, just copy them into /opt/stack/images.
 kickstart file that can be used to build an undercloud Live CD.
 
 1. install fedora-kickstarts and livecd-tools if needed
-1. livecd-creator --verbose  --fslabel=Fedora-Undercloud-LiveCD --cache=/var/cache/yum/x86_64/19 --releasever=19 --config=/path/to/undercloud-live/kickstart/fedora-undercloud-livecd.ks
+1. livecd-creator --debug --verbose  --fslabel=Fedora-Undercloud-LiveCD --cache=/var/cache/yum/x86_64/19 --releasever=19 --config=/path/to/undercloud-live/kickstart/fedora-undercloud-livecd.ks
 
 This will produce a Fedora-Undercloud-LiveCD.iso file in the current directory.
 To test it simply run:
