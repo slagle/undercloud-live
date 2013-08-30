@@ -8,7 +8,26 @@ if [ -f /opt/stack/undercloud-live/.undercloud-setup ]; then
     exit
 fi
 
+# wait_for method borrowed from:
+# https://github.com/qwefi/toci/blob/master/toci_functions.sh
+wait_for(){
+    LOOPS=$1
+    SLEEPTIME=$2
+    shift ; shift
+    i=0
+    while [ $i -lt $LOOPS ] ; do
+        i=$((i + 1))
+        eval "$@" && return 0 || true
+        sleep $SLEEPTIME
+    done
+    return 1
+}
+
 source $HOME/undercloudrc
+
+# Ensure keystone is up before continuing on.
+# Waits for up to 2 minutes.
+wait_for 12 10 sudo systemctl status keystone
 
 # Make sure we have the latest $PATH set.
 source /etc/profile.d/tripleo-incubator-scripts.sh
