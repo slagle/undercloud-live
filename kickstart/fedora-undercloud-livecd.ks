@@ -116,5 +116,8 @@ EOF
 # we need grub2 back (removed by dib elements)
 yum -y install grub2-tools grub2 grub2-efi
 
+# Empty root password (easier to debug)
+passwd -d root
+
 %end
 ##############################################################################
