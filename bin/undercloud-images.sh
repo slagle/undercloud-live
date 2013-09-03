@@ -42,7 +42,7 @@ if [ ! -f $CONTROL_IMG ]; then
         -a amd64 \
         --offline \
         -o $IMAGES_DIR/overcloud-control \
-        fedora boot-stack cinder \
+        fedora boot-stack \
         heat-cfntools neutron-network-node stackuser pip-cache
 fi
 
