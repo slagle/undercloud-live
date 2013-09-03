@@ -82,13 +82,16 @@ sed -i "s/# %wheel/%wheel/" /etc/sudoers
 cp -t /lib/systemd/system \
     /root/undercloud-live/kickstart/undercloud-configure.service \
     /root/undercloud-live/kickstart/undercloud-network.service \
-    /root/undercloud-live/kickstart/undercloud-setup.service
+    /root/undercloud-live/kickstart/undercloud-setup.service \
+    /root/undercloud-live/kickstart/os-collect-config-one-time.service
 ln -s '/usr/lib/systemd/system/undercloud-configure.service' \
     '/etc/systemd/system/multi-user.target.wants/undercloud-configure.service'
 ln -s '/usr/lib/systemd/system/undercloud-setup.service' \
     '/etc/systemd/system/multi-user.target.wants/undercloud-setup.service'
 ln -s '/usr/lib/systemd/system/undercloud-network.service' \
     '/etc/systemd/system/multi-user.target.wants/undercloud-network.service'
+ln -s '/usr/lib/systemd/system/os-collect-config-one-time.service' \
+    '/etc/systemd/system/multi-user.target.wants/os-collect-config-one-time.service'
 
 # tmpfs mount dirs for:
 # yum cache
