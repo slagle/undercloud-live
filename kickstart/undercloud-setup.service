@@ -1,7 +1,8 @@
 [Unit]
 Description=undercloud-setup
-Requires=os-collect-config.service
-After=os-collect-config.service
+Requires=os-collect-config-one-time.service
+After=os-collect-config-one-time.service
+Before=os-collect-config.service
 
 [Service]
 Type=oneshot
@@ -10,6 +11,7 @@ Type=oneshot
 ExecStart=/opt/stack/undercloud-live/bin/undercloud-setup.sh
 User=stack
 SupplementaryGroups=libvirtd
+RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target

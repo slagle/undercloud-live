@@ -1,0 +1,14 @@
+[Unit]
+Description=os-collect-config-one-time
+After=cloud-final.service
+Before=crond.service
+Before=os-collect-config.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/os-collect-config --one-time
+Restart=on-failure
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
