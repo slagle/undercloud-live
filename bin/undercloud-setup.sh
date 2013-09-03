@@ -45,6 +45,6 @@ cat /opt/stack/boot-stack/virtual-power-key.pub >> ~/.ssh/authorized_keys
 # Baremetal setup
 # Doing this as root b/c when this script is called from systemd, the access
 # to the libvirtd socket is restricted.
-sudo -i /opt/stack/tripleo-incubator/scripts/create-nodes 1 1024 10 2
+sudo -i /opt/stack/tripleo-incubator/scripts/create-nodes 1 2048 10 2
 
 sudo touch /opt/stack/undercloud-live/.undercloud-setup
