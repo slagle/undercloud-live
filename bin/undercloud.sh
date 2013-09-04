@@ -33,6 +33,16 @@ fi
 
 $(dirname $0)/undercloud-network.sh
 
+# Switch over to use iptables instead of firewalld
+# This is needed by os-refresh-config
+sudo systemctl stop firewalld
+sudo systemctl mask firewalld
+sudo touch /etc/sysconfig/iptables
+sudo systemctl enable iptables
+sudo systemctl enable ip6tables
+sudo systemctl start iptables
+sudo systemctl start ip6tables
+
 # starts all services and runs os-refresh-config (via os-collect-config
 # service)
 sudo systemctl daemon-reload

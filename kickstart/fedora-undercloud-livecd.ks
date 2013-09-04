@@ -122,5 +122,13 @@ yum -y install grub2-tools grub2 grub2-efi
 # Empty root password (easier to debug)
 passwd -d root
 
+# Switch over to use iptables instead of firewalld
+# This is needed by os-refresh-config
+systemctl stop firewalld
+systemctl mask firewalld
+touch /etc/sysconfig/iptables
+systemctl enable iptables
+systemctl enable ip6tables
+
 %end
 ##############################################################################
