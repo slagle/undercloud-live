@@ -124,11 +124,15 @@ passwd -d root
 
 # Switch over to use iptables instead of firewalld
 # This is needed by os-refresh-config
-systemctl stop firewalld
-systemctl mask firewalld
+# systemctl mask firewalld
+ln -s '/dev/null' '/etc/systemd/system/firewalld.service'
+
 touch /etc/sysconfig/iptables
-systemctl enable iptables
-systemctl enable ip6tables
+# systemctl enable iptables
+ln -s '/usr/lib/systemd/system/iptables.service' '/etc/systemd/system/basic.target.wants/iptables.service'
+# systemctl enable ip6tables
+ln -s '/usr/lib/systemd/system/ip6tables.service' '/etc/systemd/system/basic.target.wants/ip6tables.service'
+
 
 %end
 ##############################################################################
