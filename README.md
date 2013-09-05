@@ -62,9 +62,8 @@ undercloud, just copy them into /opt/stack/images.
   branch there sets specific hashes to use via the source-repository interface.
 * If you reboot the undercloud system, you will need to rerun
   bin/undercloud-network.sh
-* The firewalld service will be shutdown by undercloud.sh.  There's currently a
-  bug in the iptables configuration that prevents the overcloud from pxe booting that is still
-  being investigated.
+* The system is configured to use the iptables service instead of the firewalld
+  service.
 * SELinux is set to Permissive mode.  Otherwise, rabbitmq-server will not
   start.  
   See: https://bugzilla.redhat.com/show_bug.cgi?id=998682  
