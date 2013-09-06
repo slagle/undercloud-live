@@ -116,7 +116,6 @@ tmpfs /opt/stack/images tmpfs rw,uid=$STACK_ID,gid=$STACK_GROUP_ID 0 0
 tmpfs /var/lib/glance/images tmpfs rw,uid=$GLANCE_ID,gid=$GLANCE_GROUP_ID 0 0
 tmpfs /var/lib/nova/instances tmpfs rw,uid=$NOVA_ID,gid=$NOVA_GROUP_ID 0 0
 tmpfs /var/lib/mysql tmpfs rw,uid=$MYSQL_ID,gid=$MYSQL_GROUP_ID 0 0
-tmpfs /var/log tmpfs rw,uid=0,gid=0 0 0
 EOF
 
 # we need grub2 back (removed by dib elements)
