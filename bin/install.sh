@@ -72,6 +72,12 @@ if [ ! -e /etc/profile.d/tripleo-incubator-scripts.sh ]; then
     sudo bash -c "echo export PATH=/opt/stack/diskimage-builder/bin/:'\$PATH' >> /etc/profile.d/tripleo-incubator-scripts.sh"
 fi
 
+# This adds the havana repo.
+dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
+    -e puppet \
+    -k install \
+    -i
+
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
     -e fedora \
     -k pre-install \
