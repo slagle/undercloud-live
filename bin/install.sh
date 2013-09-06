@@ -13,10 +13,6 @@ sudo yum install -y python-pip
 # busybox is a requirement of ramdisk-image-create from diskimage-builder
 sudo yum install -y busybox
 
-# Migrate over to the latest setuptools
-sudo pip install -U distribute
-sudo pip install -U setuptools
-
 # For some reason, pbr is not getting installed correctly.
 # It is listed as setup_requires for diskimage-builder, and 
 # pip thinks it's installed from then on out, even though it is not.
