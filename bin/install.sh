@@ -42,7 +42,7 @@ pushd diskimage-builder
 git checkout 9211a7fecbadc13e8254085133df1e3b53f150d8
 popd
 
-git clone https://github.com/slagle/tripleo-image-elements.git
+git clone https://github.com/agroup/tripleo-puppet-elements
 pushd tripleo-image-elements
 git checkout undercloud-live
 popd
