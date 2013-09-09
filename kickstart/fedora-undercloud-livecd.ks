@@ -107,15 +107,12 @@ export GLANCE_ID=`id -u glance`
 export GLANCE_GROUP_ID=`id -g glance`
 export NOVA_ID=`id -u nova`
 export NOVA_GROUP_ID=`id -g nova`
-export MYSQL_ID=`id -u mysql`
-export MYSQL_GROUP_ID=`id -g mysql`
 cat << EOF >> /etc/fstab
 tmpfs /home/stack/.cache/image-create/ccache tmpfs rw,uid=$STACK_ID,gid=$STACK_GROUP_ID 0 0
 tmpfs /home/stack/.cache/image-create/yum tmpfs rw,uid=$STACK_ID,gid=$STACK_GROUP_ID 0 0
 tmpfs /opt/stack/images tmpfs rw,uid=$STACK_ID,gid=$STACK_GROUP_ID 0 0
 tmpfs /var/lib/glance/images tmpfs rw,uid=$GLANCE_ID,gid=$GLANCE_GROUP_ID 0 0
 tmpfs /var/lib/nova/instances tmpfs rw,uid=$NOVA_ID,gid=$NOVA_GROUP_ID 0 0
-tmpfs /var/lib/mysql tmpfs rw,uid=$MYSQL_ID,gid=$MYSQL_GROUP_ID 0 0
 EOF
 
 # we need grub2 back (removed by dib elements)
