@@ -2,8 +2,6 @@
 Description=undercloud-network
 Requires=undercloud-configure.service
 After=undercloud-configure.service
-Requires=openvswitch.service
-After=openvswitch.service
 Before=os-collect-config-one-time.service
 
 [Service]
@@ -14,4 +12,4 @@ RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
-RequiredBy=os-collect-config.service
+RequiredBy=os-collect-config-one-time.service
