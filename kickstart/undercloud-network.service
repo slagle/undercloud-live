@@ -1,0 +1,17 @@
+[Unit]
+Description=undercloud-network
+Requires=undercloud-configure.service
+After=undercloud-configure.service
+Requires=openvswitch.service
+After=openvswitch.service
+Before=os-collect-config-one-time.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sudo /opt/stack/undercloud-live/bin/undercloud-network.sh
+User=stack
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+RequiredBy=os-collect-config.service
