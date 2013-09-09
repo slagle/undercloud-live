@@ -98,6 +98,7 @@ ln -s '/usr/lib/systemd/system/os-collect-config-one-time.service' \
 # ccache
 # /opt/stack/images
 # /var/lib/glance/images
+# /var/lib/nova/instances
 mkdir -p /opt/stack/images
 chgrp stack /opt/stack/images
 chmod 775 /opt/stack/images
