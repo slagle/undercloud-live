@@ -2,6 +2,8 @@
 Description=undercloud-network
 Requires=undercloud-configure.service
 After=undercloud-configure.service
+Requires=libvirtd.service
+After=libvirtd.service
 Before=os-collect-config-one-time.service
 
 [Service]
