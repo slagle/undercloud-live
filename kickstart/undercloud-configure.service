@@ -1,8 +1,7 @@
 [Unit]
 Description=undercloud-configure
 Before=os-collect-config-one-time.service
-Requires=libvirtd.service
-After=libvirtd.service
+Before=libvirtd.service
 
 [Service]
 Type=oneshot
@@ -13,3 +12,4 @@ RemainAfterExit=yes
 [Install]
 WantedBy=multi-user.target
 RequiredBy=os-collect-config-one-time.service
+RequiredBy=libvirtd.service
