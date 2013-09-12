@@ -43,7 +43,6 @@ if ! id | grep libvirtd; then
            sudo sed -i 's/^#unix_sock_group.*/unix_sock_group = "libvirtd"/g' $libvirtd_file
            sudo sed -i 's/^#auth_unix_rw.*/auth_unix_rw = "none"/g' $libvirtd_file
            sudo sed -i 's/^#unix_sock_rw_perms.*/unix_sock_rw_perms = "0770"/g' $libvirtd_file
-           sudo service libvirtd restart
        fi
     fi
 fi
@@ -63,7 +62,6 @@ if [ ! -f ~/.ssh/authorized_keys ]; then
     chmod 600 ~/.ssh/authorized_keys
 fi
 
-sudo service libvirtd restart
 sudo service openvswitch restart
 # this often reports failure, even though the service is up
 sudo service rabbitmq-server restart || true

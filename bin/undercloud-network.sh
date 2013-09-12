@@ -2,7 +2,11 @@
 
 set -eux
 
+source /opt/stack/undercloud-live/bin/undercloud-common.sh
+
 # This script needs to be rerun if you reboot the undercloud.
+
+wait_for 12 10 ls /var/run/libvirt/libvirt-sock
 
 PUBLIC_INTERFACE=${PUBLIC_INTERFACE:-ucl0}
 
