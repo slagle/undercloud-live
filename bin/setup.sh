@@ -2,11 +2,11 @@
 
 set -eux
 
-source /opt/stack/undercloud-live/bin/undercloud-common.sh
+source /opt/stack/undercloud-live/bin/common.sh
 
 # The commands in this script require a running, configured cloud.
 
-if [ -f /opt/stack/undercloud-live/.undercloud-setup ]; then
+if [ -f /opt/stack/undercloud-live/.setup ]; then
     exit
 fi
 
@@ -37,4 +37,4 @@ cat /opt/stack/boot-stack/virtual-power-key.pub >> ~/.ssh/authorized_keys
 # to the libvirtd socket is restricted.
 sudo -i /opt/stack/tripleo-incubator/scripts/create-nodes 1 2048 10 2
 
-sudo touch /opt/stack/undercloud-live/.undercloud-setup
+sudo touch /opt/stack/undercloud-live/.setup

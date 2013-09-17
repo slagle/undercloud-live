@@ -23,7 +23,7 @@ fi
 # See: https://bugzilla.redhat.com/show_bug.cgi?id=986667
 sudo mkdir -p /var/lock/subsys
 
-$(dirname $0)/undercloud-install.sh
+$(dirname $0)/install.sh
 
 # Switch over to use iptables instead of firewalld
 # This is needed by os-refresh-config
@@ -38,6 +38,14 @@ sudo systemctl start ip6tables
 # starts all services and runs os-refresh-config (via os-collect-config
 # service)
 sudo systemctl daemon-reload
+<<<<<<< HEAD
 UCL_USER=$USER sudo -E os-refresh-config
+=======
+sudo os-refresh-config
+
+# Need to wait for services to finish coming up
+sleep 10
+$(dirname $0)/setup.sh
+>>>>>>> 25ad9eb... update scripts for file renames
 
 echo "undercloud.sh run complete."

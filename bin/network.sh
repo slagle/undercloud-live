@@ -2,7 +2,7 @@
 
 set -eux
 
-source /opt/stack/undercloud-live/bin/undercloud-common.sh
+source /opt/stack/undercloud-live/bin/common.sh
 
 # This script needs to be rerun if you reboot the undercloud.
 

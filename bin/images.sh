@@ -47,7 +47,7 @@ if [ ! -f $COMPUTE_IMG ]; then
         neutron-openvswitch-agent heat-cfntools stackuser pip-cache
 fi
 
-/opt/stack/undercloud-live/bin/undercloud-baremetal.sh
+/opt/stack/undercloud-live/bin/baremetal.sh
 
 /opt/stack/tripleo-incubator/scripts/load-image $COMPUTE_IMG
 /opt/stack/tripleo-incubator/scripts/load-image $CONTROL_IMG
