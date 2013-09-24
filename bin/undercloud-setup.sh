@@ -16,6 +16,9 @@ source $HOME/undercloudrc
 # Waits for up to 2 minutes.
 wait_for 12 10 sudo systemctl status keystone
 
+# Because keystone just still isn't up yet...
+sleep 5
+
 # Make sure we have the latest $PATH set.
 source /etc/profile.d/tripleo-incubator-scripts.sh
 
