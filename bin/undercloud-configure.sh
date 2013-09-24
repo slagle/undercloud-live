@@ -63,6 +63,7 @@ if [ ! -f ~/.ssh/authorized_keys ]; then
 fi
 
 sudo service openvswitch restart
+sudo service libvirtd restart
 # this often reports failure, even though the service is up
 sudo service rabbitmq-server restart || true
 

@@ -19,6 +19,3 @@ sudo sed -i "s/bridge name='brbm'/bridge name='br-ctlplane'/" /opt/stack/tripleo
 /opt/stack/tripleo-incubator/scripts/setup-network
 
 sudo ip link add $PUBLIC_INTERFACE type dummy
-
-# Restart dnsmasq service.  This is needed b/c br-ctlplane was assigned an IP.
-sudo systemctl restart nova-bm-dnsmasq

@@ -38,6 +38,6 @@ sudo systemctl start ip6tables
 # starts all services and runs os-refresh-config (via os-collect-config
 # service)
 sudo systemctl daemon-reload
-sudo os-refresh-config
+UCL_USER=$USER sudo -E os-refresh-config
 
 echo "undercloud.sh run complete."
