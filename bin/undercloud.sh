@@ -24,14 +24,11 @@ fi
 sudo mkdir -p /var/lock/subsys
 
 $(dirname $0)/undercloud-install.sh
-$(dirname $0)/undercloud-configure.sh
 
 # need to exec to pick up the new group
 if ! id | grep libvirtd; then
     exec sudo su -l $USER $0
 fi
-
-$(dirname $0)/undercloud-network.sh
 
 # Switch over to use iptables instead of firewalld
 # This is needed by os-refresh-config
@@ -47,9 +44,5 @@ sudo systemctl start ip6tables
 # service)
 sudo systemctl daemon-reload
 sudo os-refresh-config
-
-# Need to wait for services to finish coming up
-sleep 10
-$(dirname $0)/undercloud-setup.sh
 
 echo "undercloud.sh run complete."

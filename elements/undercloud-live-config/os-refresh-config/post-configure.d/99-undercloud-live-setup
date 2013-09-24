@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -eu
+
+if [ "$USER" = "root" ]; then
+    UCL_USER=stack
+else
+    UCL_USER=$USER
+fi
+
+sudo -u $UCL_USER /opt/stack/undercloud-live/bin/undercloud-setup.sh
