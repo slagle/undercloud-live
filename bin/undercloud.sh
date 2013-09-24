@@ -25,11 +25,6 @@ sudo mkdir -p /var/lock/subsys
 
 $(dirname $0)/undercloud-install.sh
 
-# need to exec to pick up the new group
-if ! id | grep libvirtd; then
-    exec sudo su -l $USER $0
-fi
-
 # Switch over to use iptables instead of firewalld
 # This is needed by os-refresh-config
 sudo systemctl stop firewalld
