@@ -35,17 +35,8 @@ sudo systemctl enable ip6tables
 sudo systemctl start iptables
 sudo systemctl start ip6tables
 
-# starts all services and runs os-refresh-config (via os-collect-config
-# service)
+# starts all services and run os-refresh-config
 sudo systemctl daemon-reload
-<<<<<<< HEAD
 UCL_USER=$USER sudo -E os-refresh-config
-=======
-sudo os-refresh-config
-
-# Need to wait for services to finish coming up
-sleep 10
-$(dirname $0)/setup.sh
->>>>>>> 25ad9eb... update scripts for file renames
 
 echo "undercloud.sh run complete."
