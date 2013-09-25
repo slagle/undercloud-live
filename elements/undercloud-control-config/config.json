@@ -1,0 +1,81 @@
+{
+  "OpenStack::Heat::Stack": {
+  },
+  "admin-token": "unset",
+  "admin-password": "unset",
+  "service-password": "unset",
+  "db-password": "unset",
+  "keystone": {
+    "host": "127.0.0.1",
+    "db": "mysql://keystone:unset@localhost/keystone"
+  },
+  "rabbit": {
+    "host": "127.0.0.1",
+    "password": "guest"
+  },
+  "glance": {
+    "host": "127.0.0.1",
+    "db": "mysql://glance:unset@localhost/glance"
+  },
+  "nova": {
+    "host": "127.0.0.1",
+    "db":    "mysql://nova:unset@localhost/nova",
+    "tuning": {
+        "ram_allocation_ratio": "1.0",
+        "reserved_host_memory_mb": "0"
+    },
+    "baremetal": {
+      "arch": "x86_64",
+      "db": "mysql://nova:unset@localhost/nova_bm",
+      "power_manager": "nova.virt.baremetal.virtual_power_driver.VirtualPowerManager",
+      "pxe_deploy_timeout": "1200",
+      "virtual_power": {
+        "user": "stack",
+        "key": "/opt/stack/boot-stack/virtual-power-key",
+        "ssh_host": "192.168.122.1",
+        "type": "virsh"
+      }
+    },
+    "metadata-proxy": "false"
+  },
+  "bootstack": {
+    "public_interface_ip": "192.0.2.1/24",
+    "masquerade_networks": ["192.0.2.0/24"]
+  },
+  "cinder": {
+    "db": "mysql://cinder:unset@localhost/cinder",
+    "volume_size_mb": "5000"
+  },
+  "neutron": {
+    "host": "127.0.0.1",
+    "ovs_db": "mysql://neutron:unset@localhost/ovs_neutron?charset=utf8",
+    "ovs": {
+      "bridge_mappings": "ctlplane:br-ctlplane",
+      "dnsmasq_range": ["192.0.2.4", "192.0.2.4"],
+      "enable_tunneling": "False",
+      "fixed_range": {
+        "start": "192.0.2.2",
+        "end": "192.0.2.3"
+      },
+      "network_vlan_ranges": "ctlplane",
+      "physical_bridge": "br-ctlplane",
+      "physical_network": "ctlplane",
+      "public_interface": "eth0",
+      "tenant_network_type": "vlan"
+    }
+  },
+  "heat": {
+    "db": "mysql://heat:unset@localhost/heat",
+    "auth_encryption_key": "unset___________",
+    "heat_watch_server_url": "http://192.0.2.1:8003",
+    "waitcondition_server_url": "http://192.0.2.1:8000/v1/waitcondition",
+    "metadata_server_url": "http://192.0.2.1:8000",
+    "admin_tenant_name": "service",
+    "admin_user": "heat",
+    "admin_password": "unset"
+  },
+  "swift": {
+    "store_user": "unset",
+    "store_key": "unset"
+  }
+}
