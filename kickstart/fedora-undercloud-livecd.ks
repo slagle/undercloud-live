@@ -65,7 +65,7 @@ mkdir -p /var/cache/pip
 export PIP_DOWNLOAD_CACHE=/var/cache/pip
 
 # Install the undercloud
-/root/undercloud-live/bin/undercloud-install.sh
+/root/undercloud-live/bin/install.sh
 
 # move diskimage-builder cache into stack user's home dir so it can be reused
 # during image builds.

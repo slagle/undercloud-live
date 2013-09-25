@@ -36,11 +36,11 @@ continue or not.  This is for debugging purposes.
 Once the script has completed, you should have a functioning undercloud.  At
 this point, you would move onto the next steps of building images and
 deploying an overcloud.  These steps are also scripted in the
-undercloud-images.sh and undercloud-deploy-overcloud.sh scripts.  You can
+images.sh and deploy-overcloud.sh scripts.  You can
 just run these scripts if you prefer to do that instead:
 
-    $ undercloud-live/bin/undercloud-images.sh
-    $ undercloud-live/bin/undercloud-deploy-overcloud.sh
+    $ undercloud-live/bin/images.sh
+    $ undercloud-live/bin/deploy-overcloud.sh
 
 NOTE: undercloud-images.sh will not build images if the files already exist under
 /opt/stack/images.  If you already have image files you want to use on the
@@ -56,12 +56,12 @@ undercloud, just copy them into /opt/stack/images.
   This will be updated to use rpm's at a later date.
 * The git repositories that are checked out under /opt/stack are set to
   checkout specific hashes.  Some of these hashes are specified in
-  bin/undercloud-install.sh.  Others are specified in an undercloud-live branch
+  bin/install.sh.  Others are specified in an undercloud-live branch
   of a fork of tripleo-image-elements at 
   https://github.com/slagle/tripleo-image-elements.git.  The undercloud-live
   branch there sets specific hashes to use via the source-repository interface.
 * If you reboot the undercloud system, you will need to rerun
-  bin/undercloud-network.sh
+  bin/network.sh
 * The system is configured to use the iptables service instead of the firewalld
   service.
 * SELinux is set to Permissive mode.  Otherwise, rabbitmq-server will not
@@ -145,8 +145,8 @@ the overcloud.  There are scripts to do these pieces as well, but we may change
 that into just documentation instructions so that users get the full experience
 of setting up an overcloud themselves.  The scripts are here:
 
-    /opt/stack/undercloud-live/bin/undercloud-images.sh
-    /opt/stack/undercloud-live/bin/undercloud-deploy-overcloud.sh
+    /opt/stack/undercloud-live/bin/images.sh
+    /opt/stack/undercloud-live/bin/deploy-overcloud.sh
 
 After the overcloud is deployed, you can do the following to interact with
 it's services:
