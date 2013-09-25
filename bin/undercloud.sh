@@ -11,11 +11,6 @@ exec 2>&1
 echo ##########################################################
 echo Starting run of undercloud.sh at `date`
 
-# need to exec to pick up the new group
-if ! id | grep libvirtd; then
-    exec sudo su -l $USER $0
-fi
-
 PIP_DOWNLOAD_CACHE=${PIP_DOWNLOAD_CACHE:-""}
 
 if [ -z "$PIP_DOWNLOAD_CACHE" ]; then
@@ -46,6 +41,10 @@ if ! id | grep libvirtd; then
     fi
 fi
 
+# need to exec to pick up the new group
+if ! id | grep libvirtd; then
+    exec sudo su -l $USER $0
+fi
 
 # Switch over to use iptables instead of firewalld
 # This is needed by os-refresh-config
