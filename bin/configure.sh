@@ -30,23 +30,6 @@ sudo sed -i "s/192.168.122.1/$LIBVIRT_IP_ADDRESS/g" /etc/libvirt/qemu/networks/d
 sudo sed -i "s/192.168.122.2/$LIBVIRT_NETWORK_RANGE_START/g" /etc/libvirt/qemu/networks/default.xml
 sudo sed -i "s/192.168.122.254/$LIBVIRT_NETWORK_RANGE_END/g" /etc/libvirt/qemu/networks/default.xml
 
-# This libvirtd group modification should be at the top of the script due to
-# the exec.  
-grep libvirtd /etc/group || sudo groupadd libvirtd
-if ! id | grep libvirtd; then
-   echo "adding $USER to group libvirtd"
-   sudo usermod -a -G libvirtd $USER
-
-   if [ "$os" = "redhat" ]; then
-       libvirtd_file=/etc/libvirt/libvirtd.conf
-       if ! sudo grep "^unix_sock_group" $libvirtd_file > /dev/null; then
-           sudo sed -i 's/^#unix_sock_group.*/unix_sock_group = "libvirtd"/g' $libvirtd_file
-           sudo sed -i 's/^#auth_unix_rw.*/auth_unix_rw = "none"/g' $libvirtd_file
-           sudo sed -i 's/^#unix_sock_rw_perms.*/unix_sock_rw_perms = "0770"/g' $libvirtd_file
-       fi
-    fi
-fi
-
 # this fixes a bug in python-dib-elements. not all element scripts should be
 # applied with sudo.
 sudo chown -R $USER.$USER $HOME/.cache

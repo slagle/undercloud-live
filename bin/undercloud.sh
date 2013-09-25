@@ -11,6 +11,28 @@ exec 2>&1
 echo ##########################################################
 echo Starting run of undercloud.sh at `date`
 
+# This libvirtd group modification should be at the top of the script due to
+# the exec.  
+grep libvirtd /etc/group || sudo groupadd libvirtd
+if ! id | grep libvirtd; then
+   echo "adding $USER to group libvirtd"
+   sudo usermod -a -G libvirtd $USER
+
+   if [ "$os" = "redhat" ]; then
+       libvirtd_file=/etc/libvirt/libvirtd.conf
+       if ! sudo grep "^unix_sock_group" $libvirtd_file > /dev/null; then
+           sudo sed -i 's/^#unix_sock_group.*/unix_sock_group = "libvirtd"/g' $libvirtd_file
+           sudo sed -i 's/^#auth_unix_rw.*/auth_unix_rw = "none"/g' $libvirtd_file
+           sudo sed -i 's/^#unix_sock_rw_perms.*/unix_sock_rw_perms = "0770"/g' $libvirtd_file
+       fi
+    fi
+fi
+
+# need to exec to pick up the new group
+if ! id | grep libvirtd; then
+    exec sudo su -l $USER $0
+fi
+
 PIP_DOWNLOAD_CACHE=${PIP_DOWNLOAD_CACHE:-""}
 
 if [ -z "$PIP_DOWNLOAD_CACHE" ]; then

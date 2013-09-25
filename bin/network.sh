@@ -8,11 +8,6 @@ source /opt/stack/undercloud-live/bin/common.sh
 
 wait_for 12 10 ls /var/run/libvirt/libvirt-sock
 
-# need to exec to pick up the new group
-if ! id | grep libvirtd; then
-    exec sudo su -l $USER $0
-fi
-
 PUBLIC_INTERFACE=${PUBLIC_INTERFACE:-ucl0}
 
 sudo sed -i "s/bridge name='brbm'/bridge name='br-ctlplane'/" /opt/stack/tripleo-incubator/templates/brbm.xml
