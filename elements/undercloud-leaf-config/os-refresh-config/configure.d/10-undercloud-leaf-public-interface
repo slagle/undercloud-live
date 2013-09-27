@@ -1,6 +1,0 @@
-#!/bin/bash
-
-PUBLIC_INTERFACE=${PUBLIC_INTERFACE:-ucl0}
-
-sudo ip link del $PUBLIC_INTERFACE || true
-sudo ip link add $PUBLIC_INTERFACE type dummy
