@@ -20,10 +20,6 @@
   "nova": {
     "host": "127.0.0.1",
     "db":    "mysql://nova:unset@localhost/nova",
-    "tuning": {
-        "ram_allocation_ratio": "1.0",
-        "reserved_host_memory_mb": "0"
-    },
     "baremetal": {
       "arch": "x86_64",
       "db": "mysql://nova:unset@localhost/nova_bm",
