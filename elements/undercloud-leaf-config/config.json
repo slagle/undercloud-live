@@ -39,7 +39,7 @@
     "compute_hostname": "ubuntu"
   },
   "bootstack": {
-    "public_interface_ip": "192.0.2.2/32",
+    "public_interface_ip": "192.0.2.2/24",
     "masquerade_networks": ["192.0.2.0/24"]
   },
   "neutron": {

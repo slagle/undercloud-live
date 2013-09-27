@@ -1,0 +1,34 @@
+#!/bin/bash
+set -eu
+
+OK=/opt/stack/boot-stack/fedora-iptables.ok
+
+if [ -e $OK ] ; then
+    exit 0
+fi
+
+DISTRO=`lsb_release -si` || true
+
+if [[ "Fedora" = $DISTRO ]]; then
+
+    # Check if the iptables service is active
+    if systemctl is-active iptables.service ; then
+        IPT_FILE=/etc/sysconfig/iptables
+        if [ -f $IPT_FILE ]; then
+            iptables-restore < $IPT_FILE
+        fi
+
+        # DHCP, TFTP
+        iptables -I INPUT -m udp -p udp --dport 67 -j ACCEPT
+        iptables -I INPUT -m udp -p udp --dport 68 -j ACCEPT
+        iptables -I INPUT -m udp -p udp --dport 69 -j ACCEPT
+
+        # ISCSI
+        iptables -I INPUT -p tcp --dport 10000 -j ACCEPT
+
+        iptables-save > $IPT_FILE
+    fi
+
+fi
+
+touch $OK
