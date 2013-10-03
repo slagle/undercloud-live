@@ -53,11 +53,6 @@ if [ ! -e /etc/profile.d/tripleo-incubator-scripts.sh ]; then
     sudo bash -c "echo export PATH=/opt/stack/diskimage-builder/bin/:'\$PATH' >> /etc/profile.d/tripleo-incubator-scripts.sh"
 fi
 
-# mkdir -p /opt/stack/lsb-release
-# pushd /opt/stack/lsb-release
-# sudo curl -LO https://bzr.linuxfoundation.org/loggerhead/lsb/devel/si/download/head:/lsb_release-20060624065236-gakl5b7e37gwk5mg-12/lsb_release
-# popd
-
 # This blacklists the script that removes grub2.  Obviously, we don't want to
 # do that in this scenario.
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
