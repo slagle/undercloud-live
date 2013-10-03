@@ -2,8 +2,8 @@
 
 set -eux
 
-if [ -f /opt/stack/undercloud-live/.undercloud-install ]; then
-    echo undercloud-install.sh has already run, exiting.
+if [ -f /opt/stack/undercloud-live/.install ]; then
+    echo install.sh has already run, exiting.
     exit
 fi
 
@@ -71,8 +71,8 @@ dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
     -e source-repositories boot-stack nova-baremetal \
     -k extra-data \
     -i
-# selinux-permissive is included b/c rabbitmq-server does not start with
-# selinux enforcing.
+# rabbitmq-server does not start with selinux enforcing.
+# https://bugzilla.redhat.com/show_bug.cgi?id=998682
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
                 undercloud-live/elements \
     -e boot-stack nova-baremetal stackuser heat-cfntools \
@@ -97,11 +97,7 @@ EOF
 "
 fi
 
-# rabbitmq-server does not start with selinux enforcing.
-# https://bugzilla.redhat.com/show_bug.cgi?id=998682
-sudo sed -i "s/SELINUX=enforcing/SELINUX=permissive/" /etc/selinux/config
-
 # Overcloud heat template
 sudo make -C /opt/stack/tripleo-heat-templates overcloud.yaml
 
-touch /opt/stack/undercloud-live/.undercloud-install 
+touch /opt/stack/undercloud-live/.install 

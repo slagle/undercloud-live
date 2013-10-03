@@ -23,15 +23,28 @@ fi
 # See: https://bugzilla.redhat.com/show_bug.cgi?id=986667
 sudo mkdir -p /var/lock/subsys
 
-$(dirname $0)/undercloud-install.sh
-$(dirname $0)/undercloud-configure.sh
+$(dirname $0)/install.sh
+
+os=redhat
+grep libvirtd /etc/group || sudo groupadd libvirtd
+if ! id | grep libvirtd; then
+   echo "adding $USER to group libvirtd"
+   sudo usermod -a -G libvirtd $USER
+
+   if [ "$os" = "redhat" ]; then
+       libvirtd_file=/etc/libvirt/libvirtd.conf
+       if ! sudo grep "^unix_sock_group" $libvirtd_file > /dev/null; then
+           sudo sed -i 's/^#unix_sock_group.*/unix_sock_group = "libvirtd"/g' $libvirtd_file
+           sudo sed -i 's/^#auth_unix_rw.*/auth_unix_rw = "none"/g' $libvirtd_file
+           sudo sed -i 's/^#unix_sock_rw_perms.*/unix_sock_rw_perms = "0770"/g' $libvirtd_file
+       fi
+    fi
+fi
 
 # need to exec to pick up the new group
 if ! id | grep libvirtd; then
     exec sudo su -l $USER $0
 fi
-
-$(dirname $0)/undercloud-network.sh
 
 # Switch over to use iptables instead of firewalld
 # This is needed by os-refresh-config
@@ -43,13 +56,8 @@ sudo systemctl enable ip6tables
 sudo systemctl start iptables
 sudo systemctl start ip6tables
 
-# starts all services and runs os-refresh-config (via os-collect-config
-# service)
+# starts all services and run os-refresh-config
 sudo systemctl daemon-reload
-sudo os-refresh-config
-
-# Need to wait for services to finish coming up
-sleep 10
-$(dirname $0)/undercloud-setup.sh
+UCL_USER=$USER sudo -E os-refresh-config
 
 echo "undercloud.sh run complete."

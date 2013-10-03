@@ -2,32 +2,22 @@
 
 set -eux
 
+source /opt/stack/undercloud-live/bin/common.sh
+
 # The commands in this script require a running, configured cloud.
 
-if [ -f /opt/stack/undercloud-live/.undercloud-setup ]; then
+if [ -f /opt/stack/undercloud-live/.setup ]; then
     exit
 fi
-
-# wait_for method borrowed from:
-# https://github.com/qwefi/toci/blob/master/toci_functions.sh
-wait_for(){
-    LOOPS=$1
-    SLEEPTIME=$2
-    shift ; shift
-    i=0
-    while [ $i -lt $LOOPS ] ; do
-        i=$((i + 1))
-        eval "$@" && return 0 || true
-        sleep $SLEEPTIME
-    done
-    return 1
-}
 
 source $HOME/undercloudrc
 
 # Ensure keystone is up before continuing on.
 # Waits for up to 2 minutes.
 wait_for 12 10 sudo systemctl status keystone
+
+# Because keystone just still isn't up yet...
+sleep 20
 
 # Make sure we have the latest $PATH set.
 source /etc/profile.d/tripleo-incubator-scripts.sh
@@ -47,4 +37,4 @@ cat /opt/stack/boot-stack/virtual-power-key.pub >> ~/.ssh/authorized_keys
 # to the libvirtd socket is restricted.
 sudo -i /opt/stack/tripleo-incubator/scripts/create-nodes 1 2048 10 2
 
-sudo touch /opt/stack/undercloud-live/.undercloud-setup
+sudo touch /opt/stack/undercloud-live/.setup

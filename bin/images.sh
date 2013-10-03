@@ -19,14 +19,6 @@ export ELEMENTS_PATH
 mkdir -p $IMAGES_DIR
 pushd $IMAGES_DIR
 
-# curl -L -O $DEPLOY_KERNEL_URL
-# curl -L -O $DEPLOY_INITRAMFS_URL
-# curl -L -O $OVERCLOUD_COMPUTE_URL
-# curl -L -O $OVERCLOUD_CONTROL_URL
-
-# This is a fast mirror, for me anyway :-).
-# curl -L -O http://mirror.cogentco.com/pub/linux/fedora/linux/releases/19/Images/x86_64/Fedora-x86_64-19-20130627-sda.qcow2
-
 popd
 
 if [ ! -f $BM_KERNEL ]; then
@@ -55,7 +47,7 @@ if [ ! -f $COMPUTE_IMG ]; then
         neutron-openvswitch-agent heat-cfntools stackuser pip-cache
 fi
 
-/opt/stack/undercloud-live/bin/undercloud-baremetal.sh
+/opt/stack/undercloud-live/bin/baremetal.sh
 
 /opt/stack/tripleo-incubator/scripts/load-image $COMPUTE_IMG
 /opt/stack/tripleo-incubator/scripts/load-image $CONTROL_IMG

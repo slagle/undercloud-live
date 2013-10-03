@@ -65,7 +65,7 @@ mkdir -p /var/cache/pip
 export PIP_DOWNLOAD_CACHE=/var/cache/pip
 
 # Install the undercloud
-/root/undercloud-live/bin/undercloud-install.sh
+/root/undercloud-live/bin/install.sh
 
 # move diskimage-builder cache into stack user's home dir so it can be reused
 # during image builds.
@@ -78,26 +78,12 @@ chown -R stack.stack /home/stack/.cache
 # setup users to be able to run sudo with no password
 sed -i "s/# %wheel/%wheel/" /etc/sudoers
 
-# Install our setup services
-cp -t /lib/systemd/system \
-    /root/undercloud-live/kickstart/undercloud-configure.service \
-    /root/undercloud-live/kickstart/undercloud-network.service \
-    /root/undercloud-live/kickstart/undercloud-setup.service \
-    /root/undercloud-live/kickstart/os-collect-config-one-time.service
-ln -s '/usr/lib/systemd/system/undercloud-configure.service' \
-    '/etc/systemd/system/multi-user.target.wants/undercloud-configure.service'
-ln -s '/usr/lib/systemd/system/undercloud-setup.service' \
-    '/etc/systemd/system/multi-user.target.wants/undercloud-setup.service'
-ln -s '/usr/lib/systemd/system/undercloud-network.service' \
-    '/etc/systemd/system/multi-user.target.wants/undercloud-network.service'
-ln -s '/usr/lib/systemd/system/os-collect-config-one-time.service' \
-    '/etc/systemd/system/multi-user.target.wants/os-collect-config-one-time.service'
-
 # tmpfs mount dirs for:
 # yum cache
 # ccache
 # /opt/stack/images
 # /var/lib/glance/images
+# /var/lib/nova/instances
 mkdir -p /opt/stack/images
 chgrp stack /opt/stack/images
 chmod 775 /opt/stack/images
@@ -107,16 +93,12 @@ export GLANCE_ID=`id -u glance`
 export GLANCE_GROUP_ID=`id -g glance`
 export NOVA_ID=`id -u nova`
 export NOVA_GROUP_ID=`id -g nova`
-export MYSQL_ID=`id -u mysql`
-export MYSQL_GROUP_ID=`id -g mysql`
 cat << EOF >> /etc/fstab
 tmpfs /home/stack/.cache/image-create/ccache tmpfs rw,uid=$STACK_ID,gid=$STACK_GROUP_ID 0 0
 tmpfs /home/stack/.cache/image-create/yum tmpfs rw,uid=$STACK_ID,gid=$STACK_GROUP_ID 0 0
 tmpfs /opt/stack/images tmpfs rw,uid=$STACK_ID,gid=$STACK_GROUP_ID 0 0
 tmpfs /var/lib/glance/images tmpfs rw,uid=$GLANCE_ID,gid=$GLANCE_GROUP_ID 0 0
 tmpfs /var/lib/nova/instances tmpfs rw,uid=$NOVA_ID,gid=$NOVA_GROUP_ID 0 0
-tmpfs /var/lib/mysql tmpfs rw,uid=MYSQL_ID,gid=MYSQL_GROUP_ID 0 0
-tmpfs /var/lib/log tmpfs rw,uid=0,gid=0 0 0
 EOF
 
 # we need grub2 back (removed by dib elements)
