@@ -27,26 +27,22 @@ sudo yum install -y python-lxml libvirt-python libvirt qemu-img qemu-kvm git pyt
 sudo mkdir -m 777 -p /opt/stack
 pushd /opt/stack
 
-git clone https://github.com/slagle/python-dib-elements.git
+git clone https://github.com/agroup/python-dib-elements.git
 git clone https://github.com/slagle/undercloud-live.git
 
 git clone https://github.com/slagle/tripleo-incubator.git
-pushd tripleo-incubator
+# pushd tripleo-incubator
 # we have to continue to use a branch here for x86_64 to work, and our other
 # undercloud changes
-git checkout undercloud-live
-popd
+# git checkout undercloud-live
+# popd
 
 git clone https://github.com/openstack/diskimage-builder.git
 git clone https://github.com/openstack/tripleo-image-elements.git
 git clone https://github.com/openstack/tripleo-heat-templates.git
-git clone https://github.com/tripleo/bm_poseur
 
 sudo pip install -e python-dib-elements
 sudo pip install -e diskimage-builder
-
-# Add a symlink for bm_poseur as it has no setup.py
-sudo ln -s /opt/stack/bm_poseur/bm_poseur /usr/local/bin/bm_poseur
 
 # Add scripts directory from tripleo-incubator and diskimage-builder to the
 # path.
@@ -57,9 +53,17 @@ if [ ! -e /etc/profile.d/tripleo-incubator-scripts.sh ]; then
     sudo bash -c "echo export PATH=/opt/stack/diskimage-builder/bin/:'\$PATH' >> /etc/profile.d/tripleo-incubator-scripts.sh"
 fi
 
+# mkdir -p /opt/stack/lsb-release
+# pushd /opt/stack/lsb-release
+# sudo curl -LO https://bzr.linuxfoundation.org/loggerhead/lsb/devel/si/download/head:/lsb_release-20060624065236-gakl5b7e37gwk5mg-12/lsb_release
+# popd
+
+# This blacklists the script that removes grub2.  Obviously, we don't want to
+# do that in this scenario.
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
     -e fedora \
-    -k pre-install \
+    -k extra-data pre-install \
+    -b 15-fedora-remove-grub \
     -i
 dib-elements -p diskimage-builder/elements/ tripleo-image-elements/elements/ \
     -e source-repositories boot-stack nova-baremetal \

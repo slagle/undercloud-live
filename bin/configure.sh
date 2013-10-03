@@ -54,9 +54,6 @@ sudo service rabbitmq-server restart || true
 sudo systemctl enable sshd
 sudo systemctl start sshd
 
-sudo cp /root/stackrc $HOME/undercloudrc
-source $HOME/undercloudrc
-
 # Modify config.json as necessary
 sudo sed -i "s/192.168.122.1/$NETWORK/g" /var/lib/heat-cfntools/cfn-init-data
 sudo sed -i "s/\"user\": \"stack\",/\"user\": \"$USER\",/" /var/lib/heat-cfntools/cfn-init-data
