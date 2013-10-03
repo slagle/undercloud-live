@@ -38,14 +38,8 @@ git checkout undercloud-live
 popd
 
 git clone https://github.com/openstack/diskimage-builder.git
-pushd diskimage-builder
-git checkout 9211a7fecbadc13e8254085133df1e3b53f150d8
-popd
-
 git clone https://github.com/openstack/tripleo-image-elements.git
-
 git clone https://github.com/openstack/tripleo-heat-templates.git
-
 git clone https://github.com/tripleo/bm_poseur
 
 sudo pip install -e python-dib-elements
