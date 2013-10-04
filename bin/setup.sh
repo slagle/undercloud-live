@@ -25,18 +25,18 @@ source /etc/profile.d/tripleo-incubator-scripts.sh
 
 export UNDERCLOUD_IP=192.0.2.1
 
-/opt/stack/tripleo-incubator/scripts/setup-passwords -o
-source tripleo-passwords
+# /opt/stack/tripleo-incubator/scripts/setup-passwords -o
+# source tripleo-passwords
 
 sudo bash -c "cat /home/$USER/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys"
 
-init-keystone -p $UNDERCLOUD_ADMIN_PASSWORD $UNDERCLOUD_ADMIN_TOKEN \
+init-keystone -p unset unset \
     $UNDERCLOUD_IP admin@example.com root@$UNDERCLOUD_IP
 
-setup-endpoints $UNDERCLOUD_IP --glance-password $UNDERCLOUD_GLANCE_PASSWORD \
-    --heat-password $UNDERCLOUD_HEAT_PASSWORD \
-    --neutron-password $UNDERCLOUD_NEUTRON_PASSWORD \
-    --nova-password $UNDERCLOUD_NOVA_PASSWORD
+setup-endpoints $UNDERCLOUD_IP --glance-password unset \
+    --heat-password unset \
+    --neutron-password unset \
+    --nova-password unset
 
 keystone role-create --name heat_stack_user
 
