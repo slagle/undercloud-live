@@ -22,9 +22,6 @@ if [ -e /opt/stack/undercloud-live/.configure ]; then
     exit
 fi
 
-# os-apply-config needs to have run
-sudo os-apply-config
-
 # rabbitmq-server does not start with selinux enforcing.
 # https://bugzilla.redhat.com/show_bug.cgi?id=998682
 sudo setenforce 0
