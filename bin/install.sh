@@ -29,6 +29,9 @@ pushd /opt/stack
 
 git clone https://github.com/agroup/python-dib-elements.git
 git clone https://github.com/slagle/undercloud-live.git
+pushd undercloud-live
+git checkout latest
+popd
 
 git clone https://github.com/slagle/tripleo-incubator.git
 # pushd tripleo-incubator
