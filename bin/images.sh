@@ -17,9 +17,6 @@ ELEMENTS_PATH=/opt/stack/tripleo-image-elements/elements
 export ELEMENTS_PATH
 
 mkdir -p $IMAGES_DIR
-pushd $IMAGES_DIR
-
-popd
 
 if [ ! -f $BM_KERNEL ]; then
     /opt/stack/diskimage-builder/bin/ramdisk-image-create \

@@ -7,10 +7,7 @@
 set -eux
 
 # MACS must be set for setup-baremetal to work
-export MACS=$(bm_poseur get-macs)
+export MACS=$(/opt/stack/tripleo-incubator/scripts/get-vm-mac baremetal_0; /opt/stack/tripleo-incubator/scripts/get-vm-mac baremetal_1)
 # $TRIPLEO_ROOT is not true to the tripleo sense, but it's where
 # setup-baremetal look for the deploy kernel and ramfs.
-TRIPLEO_ROOT=/opt/stack/images /opt/stack/tripleo-incubator/scripts/setup-baremetal 1 1024 10 all
-
-# Workaround for https://bugs.launchpad.net/nova/+bug/1213967
-nova flavor-key baremetal unset cpu_arch
+TRIPLEO_ROOT=/opt/stack/images /opt/stack/tripleo-incubator/scripts/setup-baremetal 1 2048 20 amd64 "$MACS" undercloud-live
