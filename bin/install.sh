@@ -118,6 +118,9 @@ sudo sed -i "s/eth1/$PUBLIC_INTERFACE/g" /var/lib/heat-cfntools/cfn-init-data
 
 sudo sed -i "s/192.168.122.1/$NETWORK/g" /opt/stack/os-config-applier/templates/var/opt/undercloud-live/masquerade
 
-
+# Need to get a patch upstream for this, but for now, just fix it locally
+# Run os-config-applier earlier in the os-refresh-config configure.d phase
+sudo mv /opt/stack/os-config-refresh/configure.d/50-os-config-applier \
+        /opt/stack/os-config-refresh/configure.d/40-os-config-applier
 
 touch /opt/stack/undercloud-live/.install 
